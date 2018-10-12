@@ -24,11 +24,12 @@ public class Difuso {
     /**
      * @param args the command line arguments
      */
+  
     public static void main(String[] args)  {
         
-//        etiqueta e1=new etiqueta("malo",
-//                new int[]{2,3},
-//                new int[]{50,1});
+ //       etiqueta e1=new etiqueta("malo",
+ //              new int[]{2,3},
+ //               new int[]{50,1},new ArrayList<>io);
 //        etiqueta e2=new etiqueta("bueno",
 //                new int[]{2,3},
 //                new int[]{50,1});
