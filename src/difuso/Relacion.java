@@ -7,6 +7,7 @@
 package difuso;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +16,6 @@ import java.io.Serializable;
 public class Relacion implements Serializable
 {
    Competencia Consecuente;
-   ArrayList<> listaVectores;
+   ArrayList<Integer> listaVectores;
     
 }
