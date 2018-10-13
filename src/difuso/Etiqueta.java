@@ -9,24 +9,75 @@ package difuso;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- *
- * @author lenovo
- */
 public class Etiqueta implements Serializable{
    public String nombre;
-    public int[] puntoI=new int[2],puntoF=new int[2];
-    public ArrayList<int[][]> listaPuntos=new ArrayList<>();
+    //public int[] puntoI=new int[2],puntoF=new int[2];
+    public ArrayList<Integer> listaPuntos=new ArrayList<>();
+    public  int puntoCritico;
     //no se guardara en archivo
     transient int gradoMembresia;
-    public Etiqueta(String n,int[] pi,int[] pf,ArrayList<int[][]>lp){
+
+  
+    public  int puntoI,puntoF;
+
+    public Etiqueta(String n,int pi,int pf,int   lp){
         nombre=n;
         puntoI=pi;
         puntoF=pf;
-        listaPuntos=lp;
+        listaPuntos.add(lp);
     }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getPuntoCritico() {
+        return puntoCritico;
+    }
+
+    public void setPuntoCritico(int puntoCritico) {
+        this.puntoCritico = puntoCritico;
+    }
+
+    public int getGradoMembresia() {
+        return gradoMembresia;
+    }
+
+    public void setGradoMembresia(int gradoMembresia) {
+        this.gradoMembresia = gradoMembresia;
+    }
+
+    public int getPuntoI() {
+        return puntoI;
+    }
+
+    public void setPuntoI(int puntoI) {
+        this.puntoI = puntoI;
+    }
+
+    public int getPuntoF() {
+        return puntoF;
+    }
+
+    public void setPuntoF(int puntoF) {
+        this.puntoF = puntoF;
+    }
+
+    public ArrayList<Integer> getListaPuntos() {
+        return listaPuntos;
+    }
+
+    public void setListaPuntos(ArrayList<Integer> listaPuntos) {
+        this.listaPuntos = listaPuntos;
+    }
+
+
     public float  gradoMembresia()
-    {
+    {   
         return 0;
     }
     
