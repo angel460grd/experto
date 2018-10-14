@@ -48,7 +48,7 @@ public class Disfusificacion {
                     String nombreCompetencia = comp.getNombre();
                     String nombreEtiqueta = comp.getEtiquetas().get(etiqueta).getNombre();
 
-                    v.add(new Etiqueta(nombreEtiqueta, 0, 1, 5));
+                    v.add(new Etiqueta(nombreEtiqueta, new float[]{1.0,2.0}, new floar[]{2.0,4.5}, 5));
                     c.add(new Competencia(nombreCompetencia, v));
 
                     auxPuntoCritico = Integer.parseInt(JOptionPane.showInputDialog("Deseas ingresar otro punto critico \n 1.- SI \n 2.- NO"));
