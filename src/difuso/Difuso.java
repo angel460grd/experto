@@ -57,7 +57,7 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-        c.guardar(a1);
+        c.cargarCompetencias();
 
         puntos=new ArrayList<>();
         puntos.add(new float[]{0,1});
@@ -85,7 +85,7 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-        c.guardar(a1);
+        c.cargarCompetencias();
         puntos=new ArrayList<>();
         puntos.add(new float[]{0,1});
         puntos.add(new float[]{40,1});
@@ -111,7 +111,7 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-        c.guardar(a1);
+        c.cargarCompetencias();
         
         */
         ArrayList<Competencia> compe=c.cargarCompetencias();

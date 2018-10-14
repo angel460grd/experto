@@ -34,7 +34,8 @@ public class control {
       }catch(IOException e){
         e.printStackTrace();}
     }
-    public void guardar( Competencia competencia )
+    
+    public void guardarCompetencias( Competencia competencia )
     {
             ArrayList<Competencia>personas=cargarCompetencias();
             try{
