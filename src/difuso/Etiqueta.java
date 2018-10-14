@@ -11,20 +11,20 @@ import java.util.ArrayList;
 
 public class Etiqueta implements Serializable{
    public String nombre;
-    //public int[] puntoI=new int[2],puntoF=new int[2];
-    public ArrayList<Integer> listaPuntos=new ArrayList<>();
+    public float[] puntoI=new float[2],puntoF=new float[2];
+    public ArrayList<float[]> listaPuntos=new ArrayList<>();
     public  int puntoCritico;
     //no se guardara en archivo
-    transient int gradoMembresia;
+    transient float gradoMembresia;
 
   
-    public  int puntoI,puntoF;
+    //public  int puntoI,puntoF;
 
-    public Etiqueta(String n,int pi,int pf,int   lp){
+    public Etiqueta(String n,float[] pi,float[] pf,ArrayList<float[]>   lp){
         nombre=n;
         puntoI=pi;
         puntoF=pf;
-        listaPuntos.add(lp);
+        listaPuntos=lp;
     }
     
     public String getNombre() {
@@ -43,7 +43,7 @@ public class Etiqueta implements Serializable{
         this.puntoCritico = puntoCritico;
     }
 
-    public int getGradoMembresia() {
+    public float getGradoMembresia() {
         return gradoMembresia;
     }
 
@@ -51,34 +51,56 @@ public class Etiqueta implements Serializable{
         this.gradoMembresia = gradoMembresia;
     }
 
-    public int getPuntoI() {
+    public float[]  getPuntoI() {
         return puntoI;
     }
 
-    public void setPuntoI(int puntoI) {
+    public void setPuntoI(float[] puntoI) {
         this.puntoI = puntoI;
     }
 
-    public int getPuntoF() {
+    public float[]  getPuntoF() {
         return puntoF;
     }
 
-    public void setPuntoF(int puntoF) {
+    public void setPuntoF(float[]  puntoF) {
         this.puntoF = puntoF;
     }
 
-    public ArrayList<Integer> getListaPuntos() {
+    public ArrayList<float[] > getListaPuntos() {
         return listaPuntos;
     }
 
-    public void setListaPuntos(ArrayList<Integer> listaPuntos) {
+    public void setListaPuntos(ArrayList<float[] > listaPuntos) {
         this.listaPuntos = listaPuntos;
     }
 
 
-    public float  gradoMembresia()
+    public void  gradoMembresia(float valorReal )
     {   
-        return 0;
+        //esta dentro del rango la etiqueta
+        if(valorReal>=puntoI[0]&&valorReal<=puntoF[0])
+        {
+            float[] puntoSeg2=listaPuntos.get(0);
+            float[] puntoSeg1;
+            for(int i=1;i<listaPuntos.size();i++)
+            {
+                puntoSeg1=puntoSeg2;
+                puntoSeg2=listaPuntos.get(i);
+                if(valorReal>=puntoSeg1[0]&&valorReal<=puntoSeg2[0])
+                {
+                    float pendiente=(puntoSeg2[1]-puntoSeg1[1])/(puntoSeg2[0]-puntoSeg1[1]);
+                    //sustituyo punto2 por un puto (valorReal,gradoMemvresia)
+                    this.gradoMembresia=pendiente*(valorReal-puntoSeg1[0])+puntoSeg1[1];
+                    //si ya encontre grado membresia no es nesesario seguir recorriendo los puntos
+                    break;
+                }
+                //para caso exepcional donde esta dentro de rango, pero no esta dentro de algun segmento
+                this.gradoMembresia=0;
+            }
+        }
+        else
+            this.gradoMembresia=0;
     }
     
 }
