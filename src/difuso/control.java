@@ -74,6 +74,7 @@ public class control {
             vec.EtiquetaConsecuente = JOptionPane.showOptionDialog(null, Rel.mostrarRegla(vec),
                 "consecuente en"+Rel.Consecuente.getNombre(),
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
+            System.out.println(vec.EtiquetaConsecuente);
         }
     }
         

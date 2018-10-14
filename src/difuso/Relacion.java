@@ -38,19 +38,19 @@ public class Relacion implements Serializable
     public void setVectores(ArrayList<Vector> Vectores) {
         this.Vectores = Vectores;
     }
-    public void inferir(ArrayList<Competencia> c)
+    public void inferir()
     {   //recorre todos los vectores de la relacion
         for(Vector  vector:Vectores)
         {   //el primer antesedente es el minimo de los antesedentes, en la primer iteracion
-            float aux=c.get(vector.Antecedentes.get(0)[0]).Etiquetas.get(vector.Antecedentes.get(0)[1]).gradoMembresia;
+            float aux=Antecedentes.get(vector.Antecedentes.get(0)[0]).Etiquetas.get(vector.Antecedentes.get(0)[1]).gradoMembresia;
             for(int i=1;i<vector.Antecedentes.size();i++)
             {   // si hay un antesedente con un grado de membresia menor cambia valor de aux
-                float gmAntesedente=c.get(vector.Antecedentes.get(i)[0]).Etiquetas.get(vector.Antecedentes.get(i)[1]).gradoMembresia;
-                if(aux<gmAntesedente )
+                float gmAntesedente=Antecedentes.get(vector.Antecedentes.get(i)[0]).Etiquetas.get(vector.Antecedentes.get(i)[1]).gradoMembresia;
+                if(gmAntesedente< aux)
                     aux=gmAntesedente;
             }
             //de los minimos de cada vector, ve salvando el mayor
-            if(aux>Consecuente.Etiquetas.get(vector.EtiquetaConsecuente).gradoMembresia)
+            if(Consecuente.Etiquetas.get(vector.EtiquetaConsecuente).gradoMembresia<aux)
                 Consecuente.Etiquetas.get(vector.EtiquetaConsecuente).gradoMembresia=aux;
         }
     }
@@ -85,6 +85,14 @@ public class Relacion implements Serializable
             regla+=Antecedentes.get(antecedente[0]).getNombre()+" es "+Antecedentes.get(antecedente[0]).Etiquetas.get(antecedente[1]).getNombre()+" y ";
         // el subString es para eliminar el "y " que queda al final de regla
         return regla.substring( 0,regla.length()-3)+" Entoces "+Consecuente.Nombre+" es: ";
+    }
+    public String mostrarReglaCompleta(Vector vec)
+    {
+        String regla="si ";
+        for(int[] antecedente:vec.Antecedentes)
+            regla+=Antecedentes.get(antecedente[0]).getNombre()+" es "+Antecedentes.get(antecedente[0]).Etiquetas.get(antecedente[1]).getNombre()+" y ";
+        // el subString es para eliminar el "y " que queda al final de regla
+        return regla.substring( 0,regla.length()-3)+" Entoces "+Consecuente.Nombre+" es: "+Consecuente.Etiquetas.get(vec.EtiquetaConsecuente).getNombre();
     }
     
 }

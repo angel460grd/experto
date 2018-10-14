@@ -55,7 +55,7 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-        a1.ValorReal=79;
+        a1.ValorReal=75;
         a1.difusicar();
         competencias.add(a1);
         for(Etiqueta e:a1.Etiquetas)
@@ -86,7 +86,7 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-        a1.ValorReal=79;
+        a1.ValorReal=83;
         a1.difusicar();
         competencias.add(a1);
         for(Etiqueta e:a1.Etiquetas)
@@ -128,6 +128,11 @@ public class Difuso {
 //  a2.agregarE(e3);
   control c=new control();
   c.crearReglas(CAP);
+  CAP.inferir();
+  for(Etiqueta e:CAP.Consecuente.getEtiquetas())
+            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
+  for(Vector v:CAP.Vectores)
+      System.out.println(CAP.mostrarReglaCompleta(v));
 //        c.guardar(a1);
 //        c.guardar(a2);
         /*

@@ -15,7 +15,7 @@ public class Etiqueta implements Serializable{
     public ArrayList<float[]> listaPuntos=new ArrayList<>();
     public  int puntoCritico;
     //no se guardara en archivo
-    transient float gradoMembresia;
+    transient float gradoMembresia=0;
 
   
     //public  int puntoI,puntoF;
