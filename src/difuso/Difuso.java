@@ -26,9 +26,11 @@ public class Difuso {
      */
   
     public static void main(String[] args)  {
+        control c=new control();
         
+        //c.limiar();
         ArrayList<Competencia> competencias=new ArrayList<>(); 
-        
+       /*
         ArrayList<float[]> puntos=new ArrayList<>();
         puntos.add(new float[]{0,1});
         puntos.add(new float[]{50,1});
@@ -55,11 +57,8 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-        a1.ValorReal=75;
-        a1.difusicar();
-        competencias.add(a1);
-        for(Etiqueta e:a1.Etiquetas)
-            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
+        c.guardar(a1);
+
         puntos=new ArrayList<>();
         puntos.add(new float[]{0,1});
         puntos.add(new float[]{40,1});
@@ -86,14 +85,7 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-        a1.ValorReal=20;
-        
-        a1.difusicar();
-        competencias.add(a1);
-        for(Etiqueta e:a1.Etiquetas)
-            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
-        
-        
+        c.guardar(a1);
         puntos=new ArrayList<>();
         puntos.add(new float[]{0,1});
         puntos.add(new float[]{40,1});
@@ -119,23 +111,38 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
+        c.guardar(a1);
         
-        Relacion CAP=new Relacion(a1,competencias);
+        */
+        ArrayList<Competencia> compe=c.cargarCompetencias();
+        for(Competencia p:compe)
+        {
+            
+            System.out.println("h"+p.getNombre());
+            for(Etiqueta e:p.getEtiquetas())
+                System.out.println(e.nombre);
+        }
         
         
-        
-        
-//  persona a2 = new persona(10,"Pérez");
-//  a2.agregarE(e3);
-  control c=new control();
-  c.crearReglas(CAP);
-  CAP.inferir();
-  for(Etiqueta e:CAP.Consecuente.getEtiquetas())
+        compe.get(0).ValorReal=80;
+        compe.get(0).difusicar();
+        competencias.add(compe.get(0));
+        for(Etiqueta e:compe.get(0).Etiquetas)
             System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
-  for(Vector v:CAP.Vectores)
-      System.out.println(CAP.mostrarReglaCompleta(v));
-//        c.guardar(a1);
-//        c.guardar(a2);
+        
+        compe.get(1).ValorReal=76;
+        compe.get(1).difusicar();
+        competencias.add(compe.get(1));
+        for(Etiqueta e:compe.get(1).Etiquetas)
+            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
+        
+        Relacion CAP=new Relacion(compe.get(2),competencias);
+        c.crearReglas(CAP);
+        CAP.inferir();
+        for(Etiqueta e:CAP.Consecuente.getEtiquetas())
+                  System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
+        for(Vector v:CAP.Vectores)
+            System.out.println(CAP.mostrarReglaCompleta(v));
         /*
         ArrayList<Competencia> competencias=c.cargarCompetencias();
         for(Competencia p:competencias)
@@ -145,6 +152,22 @@ public class Difuso {
             for(Etiqueta e:p.getEtiquetas())
                 System.out.println(e.nombre);
         }
+        
+        /*
+        
+//        a1.ValorReal=20;
+//        a1.ValorReal=75;
+//        a1.difusicar();
+//        competencias.add(a1);
+//        for(Etiqueta e:a1.Etiquetas)
+//            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
+//        a1.ValorReal=20;
+//        
+//        a1.difusicar();
+//        competencias.add(a1);
+//        for(Etiqueta e:a1.Etiquetas)
+//            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
+
        */
     
 }

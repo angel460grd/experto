@@ -6,16 +6,17 @@
 
 package difuso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author lenovo
  */
-public class Competencia {
+public class Competencia implements Serializable{
     public String Nombre;
     ArrayList<Etiqueta> Etiquetas;
-    float ValorReal;
+    transient float ValorReal;
 
     public Competencia(String Nombre, ArrayList<Etiqueta> Etiquetas) {
         this.Nombre = Nombre;

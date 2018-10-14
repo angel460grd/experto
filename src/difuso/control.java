@@ -21,6 +21,19 @@ import javax.swing.JOptionPane;
  * @author lenovo
  */
 public class control {
+    public void limiar()
+    {
+        ArrayList<Competencia>personas=cargarCompetencias();
+        try{
+        FileOutputStream fs = new FileOutputStream("Competenicas.bin");//Creamos el archivo
+        ObjectOutputStream os = new ObjectOutputStream(fs);//Esta clase tiene el método writeObject() que necesitamos
+        os.writeObject(null);
+        os.close();//Hay que cerrar siempre el archivo
+      }catch(FileNotFoundException e){
+        e.printStackTrace();
+      }catch(IOException e){
+        e.printStackTrace();}
+    }
     public void guardar( Competencia competencia )
     {
             ArrayList<Competencia>personas=cargarCompetencias();
@@ -42,7 +55,7 @@ public class control {
          ArrayList<Competencia> competencias=new ArrayList<>();
         try
         {
-            File af = new File("competencia.bin");
+            File af = new File("Competenicas.bin");
             if(!af.exists())
                 return competencias;
             FileInputStream fis = new FileInputStream(af);
