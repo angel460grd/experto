@@ -82,8 +82,9 @@ public class Relacion implements Serializable
     {
         String regla="si ";
         for(int[] antecedente:vec.Antecedentes)
-            regla+=Antecedentes.get(antecedente[0]).getNombre()+" es "+Antecedentes.get(antecedente[0]).Etiquetas.get(antecedente[1]).getNombre()+" ";
-        return regla;
+            regla+=Antecedentes.get(antecedente[0]).getNombre()+" es "+Antecedentes.get(antecedente[0]).Etiquetas.get(antecedente[1]).getNombre()+" y ";
+        // el subString es para eliminar el "y " que queda al final de regla
+        return regla.substring( 0,regla.length()-3)+" Entoces "+Consecuente.Nombre+" es: ";
     }
     
 }

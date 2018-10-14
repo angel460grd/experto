@@ -42,7 +42,14 @@ public class Competencia {
     public ArrayList<Etiqueta> getEtiquetas() {
         return Etiquetas;
     }
-
+    //para el momento de pedir llenar la matriz fAM
+    public String[] nombreEtiquetas()
+    {
+        String[] etiquetas=new String[Etiquetas.size()];
+        for (int i = 0; i < etiquetas.length; i++)
+            etiquetas[i]=Etiquetas.get(i).getNombre();
+        return etiquetas;
+    }
     public void setEtiquetas(ArrayList<Etiqueta> Etiquetas) {
         this.Etiquetas = Etiquetas;
     }

@@ -120,9 +120,6 @@ public class Difuso {
         a1.agregarE(e3);
         
         Relacion CAP=new Relacion(a1,competencias);
-        CAP.crearFamVectores();
-        for(Vector v:CAP.Vectores)
-            System.out.println(CAP.mostrarRegla(v));
         
         
         
@@ -130,6 +127,7 @@ public class Difuso {
 //  persona a2 = new persona(10,"Pérez");
 //  a2.agregarE(e3);
   control c=new control();
+  c.crearReglas(CAP);
 //        c.guardar(a1);
 //        c.guardar(a2);
         /*
