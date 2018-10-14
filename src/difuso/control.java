@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,6 +64,18 @@ public class control {
         catch(IOException e){e.printStackTrace();}
         catch(ClassNotFoundException e){e.printStackTrace();}
             return competencias;
+    }
+    public void crearReglas(Relacion Rel)
+    {
+        Rel.crearFamVectores();
+        String[] opciones=Rel.Consecuente.nombreEtiquetas();
+        for(Vector vec:Rel.Vectores)
+        {
+            vec.EtiquetaConsecuente = JOptionPane.showOptionDialog(null, Rel.mostrarRegla(vec),
+                "consecuente en"+Rel.Consecuente.getNombre(),
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
+            System.out.println(vec.EtiquetaConsecuente);
+        }
     }
         
 }
