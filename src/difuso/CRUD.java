@@ -30,10 +30,12 @@ public class CRUD {
     static int saltop=0;
     static int saltoI = 0;
     Scanner teclado = new Scanner(System.in);
-    int dest = 7;
+    int dest = 10;
     int desicion;
     int posicion_logica,id;
-    String Competencia,Etiquetas;
+    float puntox,puntoy;
+  List<Float> puntos;
+   String Competencia,Etiquetas;
     List<String> hechos= new ArrayList<String>();
     List<BC<Object>> conocimiento = new ArrayList<BC<Object>>();
     BC consecuente=null;
@@ -83,7 +85,22 @@ public class CRUD {
                     System.out.println("Etiquetas");
                     formato.Etiquetas = (teclado.next());
                     entrada.writeUTF(formato.getEtiquetas());
-                    System.out.println("Otro Antecedente mas? Si=1, no =0");
+                    System.out.println("Cuantos puntos criticos ingresara? max= 2");
+                    desicion = teclado.nextInt();
+                    for(int i=0;i<desicion;i++){
+                     
+                        System.out.println("Punto critico : coordenada en x");
+                        puntox= teclado.nextFloat();
+                        entrada.writeFloat(puntox);                   
+                        entrada.writeFloat(1);
+                        puntos.add(puntox);
+                        if(desicion!=2)
+                            entrada.seek(entrada.getFilePointer()+40);
+                        else
+                            entrada.seek(entrada.getFilePointer()+16);
+
+                    }
+                    System.out.println("Otro Etiqueta mas? Si=1, no =0");
                     desicion = teclado.nextInt();
                     dest--;
                     if (dest == 0) {
@@ -92,17 +109,17 @@ public class CRUD {
                     }
 
                 } while (desicion == 1);
-
+        
                 String sa = "x";
                 formato.Etiquetas = (sa);
-                System.out.println("Numeros de antecedentes restantes " + dest);
+                System.out.println("Numeros de etiquetas restantes " + dest);
                 if (dest > 0) {
                     for (int i = 1; i <= dest; i++) {
                         entrada.writeUTF(formato.getEtiquetas());
                     }
                 }
 
-                System.out.println("Quieres otra reg? Si=1, no=0");
+                System.out.println("Quieres otra Competencia? Si=1, no=0");
                 desicion = teclado.nextInt();
                 dest = 7;
                 posicion_logica = (int) entrada.length() / tamReg;
@@ -416,6 +433,14 @@ public class CRUD {
     }
     public int getId(){
         return id;
+    }
+     public float[] carcularpuntos(float puntoI,float puntocx, float traslape){
+        traslape=traslape*puntoI;
+      float  puntoini=puntocx-traslape;
+      float puntof=puntocx+traslape;
+      float []puntos= new float[]{puntoini,puntof};
+      return puntos;
+        
     }
 
     public void busqueda_eliminar_indice(int indice) throws IOException {

@@ -86,11 +86,10 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-<<<<<<< HEAD
+
         a1.ValorReal=20;
-=======
+
         a1.ValorReal=83;
->>>>>>> ad6808f51ff59051e24554807bbba3f3f50f858d
         a1.difusicar();
         competencias.add(a1);
         for(Etiqueta e:a1.Etiquetas)
