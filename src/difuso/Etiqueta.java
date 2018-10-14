@@ -26,6 +26,10 @@ public class Etiqueta implements Serializable{
         puntoF=pf;
         listaPuntos=lp;
     }
+
+    public Etiqueta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public String getNombre() {
         return nombre;
