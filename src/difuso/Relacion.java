@@ -18,9 +18,9 @@ public class Relacion implements Serializable
    Competencia Consecuente;
    ArrayList<Vector> Vectores;
    ArrayList<Competencia> Antecedentes;
-    public Relacion(Competencia Consecuente, ArrayList<Vector> Vectores) {
+    public Relacion(Competencia Consecuente, ArrayList<Competencia> Antecedentes) {
         this.Consecuente = Consecuente;
-        this.Vectores = Vectores;
+        this.Antecedentes = Antecedentes;
     }
 
     public Competencia getConsecuente() {
@@ -68,13 +68,22 @@ public class Relacion implements Serializable
             ArrayList<Vector> aux2=new ArrayList<>();
             for (Vector aux1 : Vectores) {
                 for (int i = 0; i<Antecedentes.get(j).Etiquetas.size(); i++) {
-                    Vector vec = new Vector(aux1.Antecedentes);
+                    Vector vec = new Vector();
+                    for(int[] ant:  aux1.Antecedentes)
+                        vec.AgregarAntecedente(ant);
                     vec.AgregarAntecedente(new int[]{j,i});
                     aux2.add(vec);
                 }
             }
             Vectores=aux2;
         }
+    }
+    public String mostrarRegla(Vector vec)
+    {
+        String regla="si ";
+        for(int[] antecedente:vec.Antecedentes)
+            regla+=Antecedentes.get(antecedente[0]).getNombre()+" es "+Antecedentes.get(antecedente[0]).Etiquetas.get(antecedente[1]).getNombre()+" ";
+        return regla;
     }
     
 }
