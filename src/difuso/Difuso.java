@@ -27,34 +27,51 @@ public class Difuso {
   
     public static void main(String[] args)  {
         
- //       etiqueta e1=new etiqueta("malo",
- //              new int[]{2,3},
- //               new int[]{50,1},new ArrayList<>io);
-//        etiqueta e2=new etiqueta("bueno",
-//                new int[]{2,3},
-//                new int[]{50,1});
-//        etiqueta e3=new etiqueta("bueno",
-//                new int[]{2,3},
-//                new int[]{50,1});
-//        persona a1 = new persona(1 ,"Fernández");
-//        a1.agregarE(e1);
-//        a1.agregarE(e2);
-//        
+        ArrayList<float[]> puntos=new ArrayList<>();
+        puntos.add(new float[]{0,1});
+        puntos.add(new float[]{50,1});
+        puntos.add(new float[]{60,0});
+        Etiqueta e1=new Etiqueta("malo",
+               new float[]{0,1},
+                new float[]{60,0},puntos);
+        puntos=new ArrayList<>();
+        puntos.add(new float[]{50,0});
+        puntos.add(new float[]{60,1});
+        puntos.add(new float[]{70,1});
+        puntos.add(new float[]{80,0});
+        Etiqueta e2=new Etiqueta("regular",
+                new float[]{50,0},
+                new float[]{80,0},puntos);
+        puntos=new ArrayList<>();
+        puntos.add(new float[]{70,0});
+        puntos.add(new float[]{80,1});
+        puntos.add(new float[]{100,1});
+        Etiqueta e3=new Etiqueta("bueno",
+                new float[]{70,0},
+                new float[]{100,1},puntos);
+        Competencia a1 = new Competencia("CAS");
+        a1.agregarE(e1);
+        a1.agregarE(e2);
+        a1.agregarE(e3);
+        a1.ValorReal=79;
+        a1.difusicar();
+        for(Etiqueta e:a1.Etiquetas)
+            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia()); ;
 //  persona a2 = new persona(10,"Pérez");
 //  a2.agregarE(e3);
   control c=new control();
 //        c.guardar(a1);
 //        c.guardar(a2);
-        
-        ArrayList<persona> personas=c.cargarPersonas();
-        for(persona p:personas)
+        /*
+        ArrayList<Competencia> competencias=c.cargarCompetencias();
+        for(Competencia p:competencias)
         {
             
-            System.out.println("h"+p.getCantidad_habitaciones()+" "+p.getNombre_casa());
-            for(Etiqueta e:p.etiquetas)
+            System.out.println("h"+p.getNombre());
+            for(Etiqueta e:p.getEtiquetas())
                 System.out.println(e.nombre);
         }
-       
+       */
     
 }
 }

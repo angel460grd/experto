@@ -20,50 +20,49 @@ import java.util.ArrayList;
  * @author lenovo
  */
 public class control {
-    public void guardar( persona casa_bulma )
+    public void guardar( Competencia competencia )
     {
-            ArrayList<persona>personas=cargarPersonas();
+            ArrayList<Competencia>personas=cargarCompetencias();
             try{
-            FileOutputStream fs = new FileOutputStream("agenda.bin");//Creamos el archivo
+            FileOutputStream fs = new FileOutputStream("Competenicas.bin");//Creamos el archivo
             ObjectOutputStream os = new ObjectOutputStream(fs);//Esta clase tiene el método writeObject() que necesitamos
-            for(persona p:personas)
+            for(Competencia p:personas)
                 os.writeObject(p);
-            os.writeObject(casa_bulma);//El método writeObject() serializa el objeto y lo escribe en el archivo
+            os.writeObject(competencia);//El método writeObject() serializa el objeto y lo escribe en el archivo
             os.writeObject(null);
             os.close();//Hay que cerrar siempre el archivo
           }catch(FileNotFoundException e){
             e.printStackTrace();
           }catch(IOException e){
-            e.printStackTrace();
-  }
+            e.printStackTrace();}
     }
-        public ArrayList<persona> cargarPersonas()
+    public ArrayList<Competencia> cargarCompetencias()
+    {
+         ArrayList<Competencia> competencias=new ArrayList<>();
+        try
         {
-             ArrayList<persona> personas=new ArrayList<>();
-            try
-            {
-                File af = new File("agenda.bin");
-                if(!af.exists())
-                    return personas;
-                FileInputStream fis = new FileInputStream(af);
-                
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                persona aux;
-                do
-                {
-                    aux=(persona)ois.readObject();
-                    if(aux!=null)
-                         personas.add(aux);//El método readObject() recupera el objeto
-                
-                }while(aux!=null);
-               
-                ois.close();
-                fis.close();
+            File af = new File("competencia.bin");
+            if(!af.exists())
+                return competencias;
+            FileInputStream fis = new FileInputStream(af);
 
-            }catch(FileNotFoundException e){e.printStackTrace();}
-            catch(IOException e){e.printStackTrace();}
-            catch(ClassNotFoundException e){e.printStackTrace();}
-                return personas;
-        }
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Competencia aux;
+            do
+            {
+                aux=(Competencia)ois.readObject();
+                if(aux!=null)
+                     competencias.add(aux);//El método readObject() recupera el objeto
+
+            }while(aux!=null);
+
+            ois.close();
+            fis.close();
+
+        }catch(FileNotFoundException e){e.printStackTrace();}
+        catch(IOException e){e.printStackTrace();}
+        catch(ClassNotFoundException e){e.printStackTrace();}
+            return competencias;
+    }
         
 }
