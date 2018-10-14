@@ -19,13 +19,13 @@ import java.util.Scanner;
 public class CRUD {
      static RandomAccessFile entrada;
     static RandomAccessFile entradaI;
-    static int tamReg = 140;
+    static int tamReg = 431;
     static int tamAnt = 17;
     static int tamRegI = 8;
     static CRUD formato;
-    File archivo = new File("Reglas");
+    File archivo = new File("Competencias");
     File archivoIndice = new File("indice");
-    File bh= new File("BH");
+    File bh= new File("Bitacora");
     static int salto = 0;
     static int saltop=0;
     static int saltoI = 0;
@@ -33,7 +33,7 @@ public class CRUD {
     int dest = 7;
     int desicion;
     int posicion_logica,id;
-    String Consecuente,Antecedentes;
+    String Competencia,Etiquetas;
     List<String> hechos= new ArrayList<String>();
     List<BC<Object>> conocimiento = new ArrayList<BC<Object>>();
     BC consecuente=null;
@@ -47,7 +47,7 @@ public class CRUD {
                     archivo.delete();
                     archivoIndice.delete();
                     System.out.println("Se elimino el archivo antiguo");
-                    archivo = new File("Reglas");
+                    archivo = new File("Competencias");
                     archivoIndice = new File("indice");
                     System.out.println("Se creo el nuevo archivo");
                 }
@@ -63,7 +63,7 @@ public class CRUD {
                 int opcion = 0;
                 while (opcion == 0) {
                     formato = new CRUD();
-                    System.out.println("ID Regla");
+                    System.out.println("ID Competencia");
                     formato.id = teclado.nextInt();
                     opcion = leer_secuencial(formato.id);
                     if (opcion == 0) {
@@ -75,14 +75,14 @@ public class CRUD {
                 System.out.println("ID de la regla es " + formato.getId());
                 entrada.writeInt(formato.getId());
                 entradaI.writeInt(formato.getId());
-                System.out.println("Nombre consecuente");
-                formato.Consecuente = (teclado.next());
-                entrada.writeUTF(formato.getConsecuente());
-                System.out.println("Antecedentes \n");
+                System.out.println("Nombre competencia");
+                formato.Competencia = (teclado.next());
+                entrada.writeUTF(formato.getCompetencia());
+                System.out.println("Etiquetas \n");
                 do {
-                    System.out.println("Antecedente");
-                    formato.Antecedentes = (teclado.next());
-                    entrada.writeUTF(formato.getAntecedentes());
+                    System.out.println("Etiquetas");
+                    formato.Etiquetas = (teclado.next());
+                    entrada.writeUTF(formato.getEtiquetas());
                     System.out.println("Otro Antecedente mas? Si=1, no =0");
                     desicion = teclado.nextInt();
                     dest--;
@@ -94,11 +94,11 @@ public class CRUD {
                 } while (desicion == 1);
 
                 String sa = "x";
-                formato.Antecedentes = (sa);
+                formato.Etiquetas = (sa);
                 System.out.println("Numeros de antecedentes restantes " + dest);
                 if (dest > 0) {
                     for (int i = 1; i <= dest; i++) {
-                        entrada.writeUTF(formato.getAntecedentes());
+                        entrada.writeUTF(formato.getEtiquetas());
                     }
                 }
 
@@ -124,8 +124,8 @@ public class CRUD {
             entrada.seek(salto * 17);
             System.out.println("Escribiendo en la base de Hechos");
             formato= new CRUD();
-            formato.Antecedentes=hecho;
-            entrada.writeUTF(formato.getAntecedentes());
+            formato.Etiquetas=hecho;
+            entrada.writeUTF(formato.getEtiquetas());
             entrada.close();
             System.out.println("Se escribio en el archivo");
         } catch (IOException w) {
@@ -141,8 +141,8 @@ public class CRUD {
             int registro = (int) entrada.length() / 17;
             //System.out.println("Hola "+ registro);
             while (registro > 0) {
-                formato.Antecedentes = (entrada.readUTF());
-                hechos.add(formato.getAntecedentes());
+                formato.Etiquetas = (entrada.readUTF());
+                hechos.add(formato.getEtiquetas());
                 registro--;
                 //System.out.println(formato.getAntecedentes());
             }
@@ -169,16 +169,16 @@ public class CRUD {
 
             formato.id = (entrada.readInt());
 
-            formato.Consecuente=entrada.readUTF();
-            //System.out.println(formato.Consecuente);
-            consecuente= new BC(formato.getConsecuente(),formato.id);
+            formato.Competencia=entrada.readUTF();
+            //System.out.println(formato.Competencia);
+            consecuente= new BC(formato.getCompetencia(),formato.id);
 
             if (formato.id > 0) {
                 for (int i = 0; i < 7; i++) {
-                    formato.Antecedentes = (entrada.readUTF());
-                    if (valor.equalsIgnoreCase(formato.Antecedentes)) {
+                    formato.Etiquetas = (entrada.readUTF());
+                    if (valor.equalsIgnoreCase(formato.Etiquetas)) {
                     } else {
-                        antecedente= new BC(formato.getAntecedentes());
+                        antecedente= new BC(formato.getEtiquetas());
                         consecuente.addAntecedent(antecedente);
                     }
                 }
@@ -211,9 +211,9 @@ public class CRUD {
                     id_repe = 0;
                     break;
                 }
-                formato.Consecuente = (entrada.readUTF());
+                formato.Competencia = (entrada.readUTF());
                 for (int i = 0; i < 7; i++) {
-                    formato.Antecedentes = (entrada.readUTF());
+                    formato.Etiquetas = (entrada.readUTF());
                 }
             } else {
                 entrada.seek(entrada.getFilePointer() + 136);
@@ -232,18 +232,18 @@ public class CRUD {
         System.out.println("INFORMACION DE LA REGLA SOLICITADA");
         formato.id = entrada.readInt();
         System.out.println("ID-REGLA :" + formato.id);
-        formato.Consecuente = (entrada.readUTF());
+        formato.Competencia = (entrada.readUTF());
         System.out.println("Antecendentes :");
         String com = "x";
         com = String.format("%-15s", com);
         for (int i = 0; i < 7; i++) {
-            formato.Antecedentes = entrada.readUTF();
-            if (com.equals(formato.Antecedentes)) {
+            formato.Etiquetas = entrada.readUTF();
+            if (com.equals(formato.Etiquetas)) {
             } else {
-                System.out.println("Antecendentes " + (i + 1) + formato.Antecedentes);
+                System.out.println("Antecendentes " + (i + 1) + formato.Etiquetas);
             }
         }
-        System.out.println("Consecuente: " + formato.Consecuente);
+        System.out.println("Consecuente: " + formato.Competencia);
 
         System.out.println();
         entrada.close();
@@ -292,12 +292,12 @@ public class CRUD {
                     }
                 }
             } else {
-                formato.Consecuente = entrada.readUTF();
-                System.out.println("El consecuente antiguo es : " + formato.Consecuente);
+                formato.Competencia = entrada.readUTF();
+                System.out.println("El consecuente antiguo es : " + formato.Competencia);
                 System.out.println("Dame el nuevo consecuente");
-                formato2.Consecuente = teclado.next();
+                formato2.Competencia = teclado.next();
                 entrada.seek(entrada.getFilePointer() - 17);
-                entrada.writeUTF(formato2.getConsecuente());
+                entrada.writeUTF(formato2.getCompetencia());
             }
         }
         if (desicion == 2) {
@@ -306,13 +306,13 @@ public class CRUD {
             destin--;
             System.out.println("Antecedente no " + (destin + 1));
             entrada.seek(((direccionLog * tamReg) + 21) + (tamAnt * destin));
-            formato.Antecedentes = entrada.readUTF();
-            System.out.println("El Antecedente " + destin + " es : " + formato.Antecedentes );
+            formato.Etiquetas = entrada.readUTF();
+            System.out.println("El Antecedente " + destin + " es : " + formato.Etiquetas );
             System.out.println("Nuevos Valores");
             System.out.println("Nombre");
-            formato2.Antecedentes = teclado.next();
+            formato2.Etiquetas = teclado.next();
             entrada.seek((entrada.getFilePointer()) - tamAnt);
-            entrada.writeUTF(formato2.getAntecedentes());
+            entrada.writeUTF(formato2.getEtiquetas());
             System.out.println("Se modifico el destino");
         }
         entrada.close();
@@ -332,7 +332,7 @@ public class CRUD {
             busqueda_eliminar_indice(direccionLog);
             formato2.id = 0;
             entrada.writeInt(0);
-            entrada.writeUTF(formato2.getConsecuente());
+            entrada.writeUTF(formato2.getCompetencia());
 
         }
         if (desicion == 2) {
@@ -341,12 +341,12 @@ public class CRUD {
             destin--;
             System.out.println("Antecendetes no " + (destin + 1));
             entrada.seek(((direccionLog * tamReg) + 21) + (tamAnt * destin));
-            formato.Antecedentes = entrada.readUTF();
-            System.out.println("El antecedente " + destin + " es : " + formato.Antecedentes);
-            formato2.Antecedentes = "x";
+            formato.Etiquetas = entrada.readUTF();
+            System.out.println("El antecedente " + destin + " es : " + formato.Etiquetas);
+            formato2.Etiquetas = "x";
 
             entrada.seek((entrada.getFilePointer()) - tamAnt);
-            entrada.writeUTF(formato2.getAntecedentes());
+            entrada.writeUTF(formato2.getEtiquetas());
             System.out.println("Se elimino el destino");
         }
         entrada.close();
@@ -406,13 +406,13 @@ public class CRUD {
         }
         entradaI.close();
     }
-    public String getConsecuente() {
-        Consecuente=String.format("%-15s",Consecuente);
-        return Consecuente;
+    public String getCompetencia() {
+        Competencia=String.format("%-15s",Competencia);
+        return Competencia;
     }
-    public String getAntecedentes() {
-        Antecedentes=String.format("%-15s",Antecedentes);
-        return Antecedentes;
+    public String getEtiquetas() {
+        Etiquetas=String.format("%-15s",Etiquetas);
+        return Etiquetas;
     }
     public int getId(){
         return id;

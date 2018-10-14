@@ -86,7 +86,7 @@ public class Difuso {
         a1.agregarE(e1);
         a1.agregarE(e2);
         a1.agregarE(e3);
-        a1.ValorReal=79;
+        a1.ValorReal=20;
         a1.difusicar();
         competencias.add(a1);
         for(Etiqueta e:a1.Etiquetas)
