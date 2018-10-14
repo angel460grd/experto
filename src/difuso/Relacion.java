@@ -17,7 +17,7 @@ public class Relacion implements Serializable
 {
    Competencia Consecuente;
    ArrayList<Vector> Vectores;
-
+   ArrayList<Competencia> Antecedentes;
     public Relacion(Competencia Consecuente, ArrayList<Vector> Vectores) {
         this.Consecuente = Consecuente;
         this.Vectores = Vectores;
@@ -42,16 +42,38 @@ public class Relacion implements Serializable
     {   //recorre todos los vectores de la relacion
         for(Vector  vector:Vectores)
         {   //el primer antesedente es el minimo de los antesedentes, en la primer iteracion
-            float aux=c.get(vector.Antesedentes[0][0]).Etiquetas.get(vector.Antesedentes[0][1]).gradoMembresia;
-            for(int i=1;i<vector.Antesedentes.length;i++)
+            float aux=c.get(vector.Antecedentes.get(0)[0]).Etiquetas.get(vector.Antecedentes.get(0)[1]).gradoMembresia;
+            for(int i=1;i<vector.Antecedentes.size();i++)
             {   // si hay un antesedente con un grado de membresia menor cambia valor de aux
-                float gmAntesedente=c.get(vector.Antesedentes[i][0]).Etiquetas.get(vector.Antesedentes[i][1]).gradoMembresia;
+                float gmAntesedente=c.get(vector.Antecedentes.get(i)[0]).Etiquetas.get(vector.Antecedentes.get(i)[1]).gradoMembresia;
                 if(aux<gmAntesedente )
                     aux=gmAntesedente;
             }
             //de los minimos de cada vector, ve salvando el mayor
             if(aux>Consecuente.Etiquetas.get(vector.EtiquetaConsecuente).gradoMembresia)
                 Consecuente.Etiquetas.get(vector.EtiquetaConsecuente).gradoMembresia=aux;
+        }
+    }
+    public void crearFamVectores()
+    {
+        Vectores=new ArrayList<>();
+        for(int i=0;i<Antecedentes.get(0).Etiquetas.size();i++)
+        {
+            Vector vec=new Vector();
+            vec.AgregarAntecedente(new int[]{0,i});
+            Vectores.add(vec);
+        }
+        for(int j=1;j<Antecedentes.size() ;j++)
+        {
+            ArrayList<Vector> aux2=new ArrayList<>();
+            for (Vector aux1 : Vectores) {
+                for (int i = 0; i<Antecedentes.get(j).Etiquetas.size(); i++) {
+                    Vector vec = new Vector(aux1.Antecedentes);
+                    vec.AgregarAntecedente(new int[]{j,i});
+                    aux2.add(vec);
+                }
+            }
+            Vectores=aux2;
         }
     }
     

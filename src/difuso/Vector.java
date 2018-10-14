@@ -6,6 +6,7 @@
 package difuso;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,15 +16,26 @@ public class Vector implements Serializable {
    public int EtiquetaConsecuente;
    // no esnesesario una lista solo un areglo sin definir tamaño
    //la segunda dimencion tiene dos campos 0 id competencia antesedente id de su etiqueta
-   public int[][] Antesedentes;
+   public ArrayList<int []> Antecedentes;
 
-    public Vector(int EtiquetaConsecuente, int[][] Antesedentes) {
+    public Vector(int EtiquetaConsecuente, ArrayList<int[]> Antecedentes) {
         this.EtiquetaConsecuente = EtiquetaConsecuente;
-        this.Antesedentes = Antesedentes;
+        this.Antecedentes = Antecedentes;
     }
 
-   
+    public Vector(ArrayList<int[]> Antecedentes) {
+        this.Antecedentes = Antecedentes;
+    }
+    public Vector()
+    {
+        Antecedentes=new ArrayList<>();
+    }
+    public void AgregarAntecedente(int[] ant)
+    {
+        Antecedentes.add(ant);
+    }
 
-   
-   
+    public void setEtiquetaConsecuente(int EtiquetaConsecuente) {
+        this.EtiquetaConsecuente = EtiquetaConsecuente;
+    }
 }
