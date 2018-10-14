@@ -46,12 +46,12 @@ public class Difuso {
 //        c.guardar(a1);
 //        c.guardar(a2);
         
-        ArrayList<persona> personas=c.cargarPersonas();
-        for(persona p:personas)
+        ArrayList<Competencia> competencias=c.cargarCompetencias();
+        for(Competencia p:competencias)
         {
             
-            System.out.println("h"+p.getCantidad_habitaciones()+" "+p.getNombre_casa());
-            for(Etiqueta e:p.etiquetas)
+            System.out.println("h"+p.getNombre());
+            for(Etiqueta e:p.getEtiquetas())
                 System.out.println(e.nombre);
         }
        
