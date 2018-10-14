@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class CRUD {
      static RandomAccessFile entrada;
     static RandomAccessFile entradaI;
-    static int tamReg = 431;
+    static int tamReg = 455;
     static int tamAnt = 17;
     static int tamRegI = 8;
     static CRUD formato;
@@ -34,8 +34,8 @@ public class CRUD {
     int desicion;
     int posicion_logica,id;
     float puntox,puntoy;
-  List<Float> puntos;
-   String Competencia,Etiquetas;
+ArrayList<float[]> puntos=new ArrayList<>();  
+String Competencia,Etiquetas;
     List<String> hechos= new ArrayList<String>();
     List<BC<Object>> conocimiento = new ArrayList<BC<Object>>();
     BC consecuente=null;
@@ -91,13 +91,17 @@ public class CRUD {
                      
                         System.out.println("Punto critico : coordenada en x");
                         puntox= teclado.nextFloat();
-                        entrada.writeFloat(puntox);                   
-                        entrada.writeFloat(1);
-                        puntos.add(puntox);
+                        entrada.writeFloat(puntox);
+                        if(i==1&& desicion==2)
+                        puntos.add(new float[]{puntox,entrada.getFilePointer()});
+                         if(desicion==1)
+                        puntos.add(new float[]{puntox,entrada.getFilePointer()});
+                        
+                        
                         if(desicion!=2)
-                            entrada.seek(entrada.getFilePointer()+40);
+                            entrada.seek(entrada.getFilePointer()+20);
                         else
-                            entrada.seek(entrada.getFilePointer()+16);
+                            entrada.seek(entrada.getFilePointer()+8);
 
                     }
                     System.out.println("Otro Etiqueta mas? Si=1, no =0");
@@ -110,6 +114,9 @@ public class CRUD {
 
                 } while (desicion == 1);
         
+                for(float []p:puntos){
+                     
+                }
                 String sa = "x";
                 formato.Etiquetas = (sa);
                 System.out.println("Numeros de etiquetas restantes " + dest);
