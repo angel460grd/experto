@@ -39,9 +39,10 @@ public class Competencia {
         this.Etiquetas = Etiquetas;
     }
 
-    public boolean difusicar()
+    public void difusicar()
     {
-        return true;
+        for(Etiqueta e:Etiquetas)
+            e.gradoMembresia(ValorReal);
     }
     public boolean desdifusicar()
     {
