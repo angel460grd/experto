@@ -89,7 +89,7 @@ public class Etiqueta implements Serializable{
                 puntoSeg2=listaPuntos.get(i);
                 if(valorReal>=puntoSeg1[0]&&valorReal<=puntoSeg2[0])
                 {
-                    float pendiente=(puntoSeg2[1]-puntoSeg1[1])/(puntoSeg2[0]-puntoSeg1[1]);
+                    float pendiente=(puntoSeg2[1]-puntoSeg1[1])/(puntoSeg2[0]-puntoSeg1[0]);
                     //sustituyo punto2 por un puto (valorReal,gradoMemvresia)
                     this.gradoMembresia=pendiente*(valorReal-puntoSeg1[0])+puntoSeg1[1];
                     //si ya encontre grado membresia no es nesesario seguir recorriendo los puntos

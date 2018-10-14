@@ -20,9 +20,17 @@ public class Competencia {
     public Competencia(String Nombre, ArrayList<Etiqueta> Etiquetas) {
         this.Nombre = Nombre;
         this.Etiquetas = Etiquetas;
-        this.ValorReal = ValorReal;
+        this.ValorReal = 0;
     }
-
+    public Competencia(String Nombre)
+    {
+        Etiquetas=new ArrayList<>();
+        this.Nombre = Nombre;
+    }
+    public void agregarE(Etiqueta eti)
+    {
+        Etiquetas.add(eti);
+    }
     public String getNombre() {
         return Nombre;
     }
