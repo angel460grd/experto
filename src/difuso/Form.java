@@ -278,6 +278,7 @@ public class Form extends javax.swing.JFrame {
 
     private void btncompetenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncompetenciaActionPerformed
         a1= new Competencia(txtnombre.getText());
+        float traslape=0;
         int contadoret=v.size();
         for(int i=0;i<contadoret;i++){
             et=v.get(i);
@@ -285,12 +286,14 @@ public class Form extends javax.swing.JFrame {
                 Etiqueta et2=v.get(i+1);
                 
                 if(et.listaPuntos.size()>1)
-                    calculartraslape(et.listaPuntos.get(i+1));
+                    traslape=calculartraslape(et.listaPuntos.get(i+1));
                 else
-                    calculartraslape(et.listaPuntos.get(i));
+                    traslape=calculartraslape(et.listaPuntos.get(i));
                 
                 et.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
                 et= new Etiqueta(et.nombre,et.listaPuntos.get(0),et.listaPuntos.get(1),et.listaPuntos);
+                  a1.agregarE(et);
+        
             }
             int contpuntos=et.listaPuntos.size();
             for(int e=0;e<contpuntos;e++){
@@ -302,8 +305,7 @@ public class Form extends javax.swing.JFrame {
        
   
         
-        a1.agregarE(et);
-        
+      
         
         
         
@@ -324,9 +326,9 @@ public class Form extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-     public float[] calculartraslape(float[]pc){
-        
-            return new float[]{1,2};
+     public float calculartraslape(float[]pc){
+        float traslape=pc[0]*(float)0.25;
+            return traslape ;
         }
     /**
      * @param args the command line arguments
