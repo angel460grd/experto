@@ -24,6 +24,13 @@ public class Relacion implements Serializable
         this.idConsecuente = idConsecuente;
         this.idAntecedentes = Antecedentes;
     }
+    public String MostrarRelacion()
+    {
+        String Relacion="";
+        for(Competencia ant:Antecedentes)
+            Relacion+=ant.Nombre+" X ";
+        return Relacion.substring(0, Relacion.length()-3)+" -> "+Consecuente.getNombre();
+    }
     public void cargarAntesedentesYConsecuete(ArrayList<Competencia> Competencias)
     {
         Antecedentes =new ArrayList<>();
