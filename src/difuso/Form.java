@@ -297,8 +297,29 @@ public class Form extends javax.swing.JFrame {
             }
             int contpuntos=et.listaPuntos.size();
             for(int e=0;e<contpuntos;e++){
-                    
+                    et.listaPuntos.add(new float[]{(et.listaPuntos.get(e)[0])-traslape,0});
+                    if(contpuntos>1){
+                        if(i+1==contadoret)
+                            et.listaPuntos.add(new float[]{(float)100,(float)1});
+                        else
+                         et.listaPuntos.add(new float[]{(et.listaPuntos.get(e+1)[0])+traslape,0});}
+                    else
+                         if(i+1==contadoret)
+                             et.listaPuntos.add(new float[]{(float)100,(float)0});
+                         else
+                             et.listaPuntos.add(new float[]{(et.listaPuntos.get(e)[0])+traslape,0}); 
+                    break;
             }
+            int p= et.listaPuntos.size();
+            for(int x=0;x<p;x++){
+                if(et.listaPuntos.get(x)[0]>et.listaPuntos.get(x+1)[0]){
+                    float []aux= et.listaPuntos.get(x);
+                    float []aux2= et.listaPuntos.get(x+1);
+                    et.listaPuntos.add(x, aux2);
+                    et.listaPuntos.add(x+1, aux);
+                }
+            }
+             a1.agregarE(et);
             
         }
         
