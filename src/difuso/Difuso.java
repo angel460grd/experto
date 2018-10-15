@@ -150,16 +150,17 @@ public class Difuso {
             System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
         
         /*
-        Relacion CAP=new Relacion(compe.get(2),competencias);
-        CAP.cargarAntesedentes(compe);
+        Relacion CAP=new Relacion(2,competencias);
+        CAP.cargarAntesedentesYConsecuete(compe);
         c.crearReglas(CAP);
         c.limiarRelaciones();
         c.guardarRelacion(CAP);
+        /*
         */
         ArrayList<Relacion> Relaciones=c.cargarRelaciones();
         Relacion CAP=Relaciones.get(0);
         System.out.println();
-        CAP.cargarAntesedentes(compe);
+        CAP.cargarAntesedentesYConsecuete(compe);
         CAP.inferir();
         System.out.println(CAP.Antecedentes.get(0).Etiquetas.get(0).gradoMembresia);
         for(Etiqueta e:CAP.Consecuente.getEtiquetas())

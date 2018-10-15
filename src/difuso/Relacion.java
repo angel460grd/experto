@@ -16,18 +16,20 @@ import java.util.ArrayList;
 public class Relacion implements Serializable
 {
    Competencia Consecuente;
+   int idConsecuente;
    ArrayList<Vector> Vectores;
    ArrayList<Integer> idAntecedentes;
    transient ArrayList<Competencia> Antecedentes =new ArrayList<>();
-    public Relacion(Competencia Consecuente, ArrayList<Integer> Antecedentes) {
-        this.Consecuente = Consecuente;
+    public Relacion(int idConsecuente, ArrayList<Integer> Antecedentes) {
+        this.idConsecuente = idConsecuente;
         this.idAntecedentes = Antecedentes;
     }
-    public void cargarAntesedentes(ArrayList<Competencia> Competencias)
+    public void cargarAntesedentesYConsecuete(ArrayList<Competencia> Competencias)
     {
         Antecedentes =new ArrayList<>();
         for(Integer id: idAntecedentes)
             Antecedentes.add(Competencias.get(id));
+        Consecuente=Competencias.get(idConsecuente);
     }
     public Competencia getConsecuente() {
         return Consecuente;
