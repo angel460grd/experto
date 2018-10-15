@@ -333,6 +333,7 @@ public class Form extends javax.swing.JFrame {
                     et.listaPuntos.add(x+1, aux);
                 }
             }
+            Etiqueta et2= new Etiqueta(et.getNombre(),et.listaPuntos.get(0),et.listaPuntos.get(p-1),et.listaPuntos);
              a1.agregarE(et);
             
         }
