@@ -30,6 +30,9 @@ public class Etiqueta implements Serializable{
     public Etiqueta() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public Etiqueta(String n){
+    nombre=n;
+    }
     
     public String getNombre() {
         return nombre;
