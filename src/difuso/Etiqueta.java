@@ -99,12 +99,38 @@ public class Etiqueta implements Serializable{
                     //si ya encontre grado membresia no es nesesario seguir recorriendo los puntos
                     break;
                 }
-                //para caso exepcional donde esta dentro de rango, pero no esta dentro de algun segmento
-                this.gradoMembresia=0;
             }
+            //para caso exepcional donde esta dentro de rango, pero no esta dentro de algun segmento
+            this.gradoMembresia=0;
         }
         else
             this.gradoMembresia=0;
     }
-    
+    public float  gmX(float valorReal )
+    {   
+        //esta dentro del rango la etiqueta
+        if(valorReal>=puntoI[0]&&valorReal<=puntoF[0])
+        {
+            float[] puntoSeg2=listaPuntos.get(0);
+            float[] puntoSeg1;
+            for(int i=1;i<listaPuntos.size();i++)
+            {
+                puntoSeg1=puntoSeg2;
+                puntoSeg2=listaPuntos.get(i);
+                if(valorReal>=puntoSeg1[0]&&valorReal<=puntoSeg2[0])
+                {
+                    float pendiente=(puntoSeg2[1]-puntoSeg1[1])/(puntoSeg2[0]-puntoSeg1[0]);
+                    //sustituyo punto2 por un puto (valorReal,gradoMemvresia)
+                    return pendiente*(valorReal-puntoSeg1[0])+puntoSeg1[1];
+                    //si ya encontre grado membresia no es nesesario seguir recorriendo los puntos
+                    
+                }
+               
+            }
+             //para caso exepcional donde esta dentro de rango, pero no esta dentro de algun segmento
+             return 0;
+        }
+        else
+            return 0;
+    }
 }
