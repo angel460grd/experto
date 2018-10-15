@@ -26,6 +26,11 @@ public class Difuso {
      */
   
     public static void main(String[] args)  {
+        
+                        Form gui = new Form();
+        gui.setVisible(true);
+
+        
         control c=new control();
         
         //c.limiar();
@@ -194,6 +199,8 @@ public class Difuso {
 //            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
 
        */
+        
+
     
 }
 }
