@@ -17,9 +17,10 @@ public class Form extends javax.swing.JFrame {
     /**
      * Creates new form Form
      */
-     Competencia a1;
+    Competencia a1;
     ArrayList<float[]> puntos;
     ArrayList<Etiqueta> v= new ArrayList<>();
+    Etiqueta et;
     int contadorpuntos=0,contadoretiquetas=0;
     public Form() {
         initComponents();
@@ -45,6 +46,8 @@ public class Form extends javax.swing.JFrame {
         btnAgregarP = new javax.swing.JButton();
         btnetiqueta = new javax.swing.JButton();
         btncompetencia = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtpuntocriticoy = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +55,7 @@ public class Form extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre de la etiqueta");
 
-        jLabel3.setText("Punto Critico");
+        jLabel3.setText("Punto Critico X");
 
         btnAgregarP.setText("Agregar Punto");
         btnAgregarP.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +78,8 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Punto Critico Y");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,16 +101,19 @@ public class Form extends javax.swing.JFrame {
                         .addComponent(btnetiqueta))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
-                        .addComponent(jLabel3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(btnAgregarP))
-                            .addComponent(txtpuntocritico, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtpuntocritico, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtpuntocriticoy, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(264, 264, 264)
-                        .addComponent(btncompetencia)))
+                        .addComponent(btncompetencia))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(btnAgregarP)))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -125,8 +133,12 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtpuntocritico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtpuntocriticoy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(btnAgregarP)
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btncompetencia)
                 .addContainerGap(89, Short.MAX_VALUE))
         );
@@ -159,7 +171,8 @@ public class Form extends javax.swing.JFrame {
 
         if(contadorpuntos<2){
             float puntox=Float.parseFloat(txtpuntocritico.getText());
-            puntos.add(new float[]{puntox,(float)1});
+             float puntoy=Float.parseFloat(txtpuntocriticoy.getText());
+            puntos.add(new float[]{puntox,puntoy});
             contadorpuntos++;
         }else
         JOptionPane.showMessageDialog(null, "Se excedio el numero de puntos criticos");
@@ -167,16 +180,63 @@ public class Form extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarPActionPerformed
 
     private void btnetiquetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnetiquetaActionPerformed
-
+        if(contadoretiquetas<8){    
+            if(!puntos.isEmpty()){
+                    et= new Etiqueta();
+                    et.setNombre(txtetiqueta.getText());
+                    et.setListaPuntos(puntos);
+                      v.add(et);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Falta definir por lo menos un punto critico");}
+        else
+            JOptionPane.showMessageDialog(null, "Se excedio de etiquetas");
+                
+            
     }//GEN-LAST:event_btnetiquetaActionPerformed
 
     private void btncompetenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncompetenciaActionPerformed
-        a1 = new Competencia(txtnombre.getText());
+        a1= new Competencia(txtnombre.getText());
+        int contadoret=v.size();
+        for(int i=0;i<contadoret;i++){
+            et=v.get(i);
+            if(i==0){      
+                Etiqueta et2=v.get(i+1);
+                
+                if(et.listaPuntos.size()>1)
+                    calculartraslape(et.listaPuntos.get(i+1));
+                else
+                    calculartraslape(et.listaPuntos.get(i));
+                
+                et.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
+                et= new Etiqueta(et.nombre,et.listaPuntos.get(0),et.listaPuntos.get(1),et.listaPuntos);
+            }
+            int contpuntos=et.listaPuntos.size();
+            for(int e=0;e<contpuntos;e++){
+                    
+            }
+            
+        }
+        
+       
+  
+        
+        a1.agregarE(et);
+        
+        
+        
+        
+        
         if(v.isEmpty()){
             JOptionPane.showMessageDialog(null, "Falta agregar etiquetas a la competencia");
         }
+        
     }//GEN-LAST:event_btncompetenciaActionPerformed
 
+     public float[] calculartraslape(float[]pc){
+        
+            return new float[]{1,2};
+        }
     /**
      * @param args the command line arguments
      */
@@ -219,9 +279,11 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtetiqueta;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtpuntocritico;
+    private javax.swing.JTextField txtpuntocriticoy;
     // End of variables declaration//GEN-END:variables
 }
