@@ -164,7 +164,7 @@ public class Difuso {
             System.out.println(CAP.mostrarReglaCompleta(v));
         
         CAP.Consecuente.desdifusicar();
-        System.out.println(CAP.Consecuente.ValorReal);
+        System.out.println(" valor real es de "+CAP.Consecuente.Nombre+" es "+CAP.Consecuente.ValorReal);
         
         /*
         ArrayList<Competencia> competencias=c.cargarCompetencias();
