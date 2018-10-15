@@ -61,6 +61,8 @@ control c;
         jScrollPane3 = new javax.swing.JScrollPane();
         listRelaciones = new javax.swing.JList();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +110,20 @@ control c;
             }
         });
 
+        jButton5.setText("reset Competencias");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("reset Relaciones");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,7 +159,12 @@ control c;
                                         .addComponent(jButton2))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(27, 27, 27)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jButton6)
+                                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(jButton5)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -167,7 +188,11 @@ control c;
                     .addComponent(jLabel3)
                     .addComponent(txtValorReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton4))
@@ -236,7 +261,35 @@ control c;
         rel.cargarAntesedentesYConsecuete(Competencias);
         rel.crearFamVectores();
         c.crearReglas(rel);
+        c.guardarRelacion(rel);
+        Relaciones=c.cargarRelaciones();
+        DefaultListModel modelo = new DefaultListModel();
+        listRelaciones.setModel(modelo);
+        for(Relacion relA:Relaciones)
+        {
+            relA.cargarAntesedentesYConsecuete(Competencias);
+            modelo.addElement(relA.MostrarRelacion());
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        c.limiarCompetencias();
+        Competencias=c.cargarCompetencias();
+        DefaultListModel modelo = new DefaultListModel();
+        listCompetencias.setModel(modelo);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        c.limiarRelaciones();
+        Relaciones=c.cargarRelaciones();
+        DefaultListModel modelo = new DefaultListModel();
+        listRelaciones.setModel(modelo);
+        for(Relacion relA:Relaciones)
+        {
+            relA.cargarAntesedentesYConsecuete(Competencias);
+            modelo.addElement(relA.MostrarRelacion());
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,6 +331,8 @@ control c;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
