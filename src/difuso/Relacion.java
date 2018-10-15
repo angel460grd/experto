@@ -17,12 +17,18 @@ public class Relacion implements Serializable
 {
    Competencia Consecuente;
    ArrayList<Vector> Vectores;
-   ArrayList<Competencia> Antecedentes;
-    public Relacion(Competencia Consecuente, ArrayList<Competencia> Antecedentes) {
+   ArrayList<Integer> idAntecedentes;
+   transient ArrayList<Competencia> Antecedentes =new ArrayList<>();
+    public Relacion(Competencia Consecuente, ArrayList<Integer> Antecedentes) {
         this.Consecuente = Consecuente;
-        this.Antecedentes = Antecedentes;
+        this.idAntecedentes = Antecedentes;
     }
-
+    public void cargarAntesedentes(ArrayList<Competencia> Competencias)
+    {
+        Antecedentes =new ArrayList<>();
+        for(Integer id: idAntecedentes)
+            Antecedentes.add(Competencias.get(id));
+    }
     public Competencia getConsecuente() {
         return Consecuente;
     }
