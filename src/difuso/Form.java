@@ -30,9 +30,8 @@ public class Form extends javax.swing.JFrame {
               for(Competencia p:compe)
               {
                   
-        
-            System.out.println(p.getNombre());
-            jComboBox1.addItem(p.getNombre().toString());
+                    jComboBox1.addItem(p.getNombre().toString());
+                    jComboBox2.addItem(p.getNombre().toString());
         
         }
          

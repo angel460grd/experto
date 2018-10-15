@@ -60,4 +60,27 @@ public class Competencia implements Serializable{
         for(Etiqueta e:Etiquetas)
             e.gradoMembresia(ValorReal);
     }
+
+
+    public void desdifusicar()
+    {
+        ValorReal=0;
+        float x=0,divisor=0,dividendo=0;
+        while(x<100)
+        {
+            float yx=0;
+            for(Etiqueta e:Etiquetas)
+            {   float gmDifuso=e.gradoMembresia,gmX=e.gmX(x);
+                    if(gmDifuso<gmX&&yx<gmX)
+                        yx=gmDifuso;
+                    else
+                        if(yx<gmX)
+                            yx=gmX;    
+            }
+            divisor+=yx*x;
+            dividendo+=yx;
+            x++;
+        }
+        ValorReal=divisor/dividendo;
+    }
 }

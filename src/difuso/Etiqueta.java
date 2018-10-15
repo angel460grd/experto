@@ -102,9 +102,10 @@ public class Etiqueta implements Serializable{
                     //si ya encontre grado membresia no es nesesario seguir recorriendo los puntos
                     break;
                 }
-            }
             //para caso exepcional donde esta dentro de rango, pero no esta dentro de algun segmento
             this.gradoMembresia=0;
+            }
+            
         }
         else
             this.gradoMembresia=0;
