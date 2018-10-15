@@ -14,6 +14,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.chart.Chart;
+import org.knowm.xchart.QuickChart;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
 
 /**
  *
@@ -145,7 +149,7 @@ public class Difuso {
         
         compe.get(1).ValorReal=76;
         compe.get(1).difusicar();
-        competencias.add(1);
+        competencias.add(1);    
         for(Etiqueta e:compe.get(1).Etiquetas)
             System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
         
@@ -170,6 +174,50 @@ public class Difuso {
         
         CAP.Consecuente.desdifusicar();
         System.out.println(" valor real es de "+CAP.Consecuente.Nombre+" es "+CAP.Consecuente.ValorReal);
+        
+        
+        System.out.println("\n"+(double) CAP.getConsecuente().getEtiquetas().get(0).getPuntoI()[0]+"  "+
+                  CAP.getConsecuente().getEtiquetas().get(0).getPuntoCritico()+"  "+
+                  (double) CAP.getConsecuente().getEtiquetas().get(0).getPuntoF()[0]);
+        
+        
+              double[] xData = new double[]{ (double) CAP.getConsecuente().getEtiquetas().get(0).getPuntoI()[0],
+                  CAP.getConsecuente().getEtiquetas().get(0).getPuntoCritico(),
+                  (double) CAP.getConsecuente().getEtiquetas().get(0).getPuntoF()[0]};
+                double[] yData = new double[]{0.0,1.0,0.0};
+
+              double[] xData1 = new double[]{ (double) CAP.getConsecuente().getEtiquetas().get(1).getPuntoI()[0],
+                  CAP.getConsecuente().getEtiquetas().get(1).getPuntoCritico(),
+                  (double) CAP.getConsecuente().getEtiquetas().get(1).getPuntoF()[0]};
+                double[] yData1 = new double[]{1.0,1.0,0.0};
+
+                double[] xData2 = new double[]{ (double) CAP.getConsecuente().getEtiquetas().get(2).getPuntoI()[0],
+                  CAP.getConsecuente().getEtiquetas().get(2).getPuntoCritico(),
+                  (double) CAP.getConsecuente().getEtiquetas().get(2).getPuntoF()[0]};
+                double[] yData2 = new double[]{0.0,1.0,0.1};
+
+
+
+
+                org.knowm.xchart.XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
+                org.knowm.xchart.XYChart chart1 = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData1, yData1);
+                org.knowm.xchart.XYChart chart2 = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData2, yData2);
+
+                
+//                ArrayList<Chart> chart = new ArrayList<>();
+               
+                
+                new SwingWrapper(chart).displayChart();
+                new SwingWrapper(chart1).displayChart();
+                new SwingWrapper(chart2).displayChart();
+    
+        
+                
+                
+                
+                
+                
+        
         
         /*
         ArrayList<Competencia> competencias=c.cargarCompetencias();
@@ -201,4 +249,6 @@ public class Difuso {
 
     
 }
+
+    
 }
