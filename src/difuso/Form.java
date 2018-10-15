@@ -263,7 +263,7 @@ public class Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPActionPerformed
-
+       puntos= new ArrayList<>();
         if(contadorpuntos<2){
             float puntox=Float.parseFloat(txtpuntocritico.getText());
              float puntoy=Float.parseFloat(txtpuntocriticoy.getText());
@@ -275,7 +275,8 @@ public class Form extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarPActionPerformed
 
     private void btnetiquetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnetiquetaActionPerformed
-        if(contadoretiquetas<8){    
+        if(contadoretiquetas<8){  
+            contadorpuntos=0;
             if(!puntos.isEmpty()){
                     et= new Etiqueta();
                     et.setNombre(txtetiqueta.getText());
@@ -305,9 +306,8 @@ public class Form extends javax.swing.JFrame {
                     traslape=calculartraslape(et.listaPuntos.get(i));
                 
                 et.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
-                et= new Etiqueta(et.nombre,et.listaPuntos.get(0),et.listaPuntos.get(1),et.listaPuntos);
-                  a1.agregarE(et);
-        
+                et2= new Etiqueta(et.nombre,et.listaPuntos.get(0),et.listaPuntos.get(1),et.listaPuntos);
+                  a1.agregarE(et2);
             }
             int contpuntos=et.listaPuntos.size();
             for(int e=0;e<contpuntos;e++){

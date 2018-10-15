@@ -27,8 +27,8 @@ public class Difuso {
   
     public static void main(String[] args)  {
         
-                        Form gui = new Form();
-        gui.setVisible(true);
+                        //Form gui = new Form();
+        //gui.setVisible(true);
 
         
         control c=new control();
