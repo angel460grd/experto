@@ -26,6 +26,11 @@ public class Difuso {
      */
   
     public static void main(String[] args)  {
+        
+                        Form gui = new Form();
+        gui.setVisible(true);
+
+        
         control c=new control();
         
 //        c.limiarCompetencias();        
@@ -164,7 +169,7 @@ public class Difuso {
             System.out.println(CAP.mostrarReglaCompleta(v));
         
         CAP.Consecuente.desdifusicar();
-        System.out.println(CAP.Consecuente.ValorReal);
+        System.out.println(" valor real es de "+CAP.Consecuente.Nombre+" es "+CAP.Consecuente.ValorReal);
         
         /*
         ArrayList<Competencia> competencias=c.cargarCompetencias();
@@ -192,6 +197,8 @@ public class Difuso {
 //            System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
 
        */
+        
+
     
 }
 }

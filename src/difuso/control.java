@@ -148,6 +148,6 @@ public class control {
             System.out.println(vec.EtiquetaConsecuente);
         }
     }
-   
+
         
 }

@@ -60,6 +60,8 @@ public class Competencia implements Serializable{
         for(Etiqueta e:Etiquetas)
             e.gradoMembresia(ValorReal);
     }
+
+
     public void desdifusicar()
     {
         ValorReal=0;
