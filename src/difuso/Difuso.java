@@ -29,7 +29,7 @@ public class Difuso {
         control c=new control();
         
         //c.limiar();
-        ArrayList<Competencia> competencias=new ArrayList<>(); 
+        ArrayList<Integer> competencias=new ArrayList<>(); 
        /*
         ArrayList<float[]> puntos=new ArrayList<>();
         puntos.add(new float[]{0,1});
@@ -126,23 +126,34 @@ public class Difuso {
         
         compe.get(0).ValorReal=80;
         compe.get(0).difusicar();
-        competencias.add(compe.get(0));
+        competencias.add(0);
         for(Etiqueta e:compe.get(0).Etiquetas)
             System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
         
         compe.get(1).ValorReal=76;
         compe.get(1).difusicar();
-        competencias.add(compe.get(1));
+        competencias.add(1);
         for(Etiqueta e:compe.get(1).Etiquetas)
             System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
         
+        /*
         Relacion CAP=new Relacion(compe.get(2),competencias);
+        CAP.cargarAntesedentes(compe);
         c.crearReglas(CAP);
+        c.limiarRelaciones();
+        c.guardarRelacion(CAP);
+        */
+        ArrayList<Relacion> Relaciones=c.cargarRelaciones();
+        Relacion CAP=Relaciones.get(0);
+        System.out.println();
+        CAP.cargarAntesedentes(compe);
         CAP.inferir();
+        System.out.println(CAP.Antecedentes.get(0).Etiquetas.get(0).gradoMembresia);
         for(Etiqueta e:CAP.Consecuente.getEtiquetas())
                   System.out.println("e:" +e.getNombre()+" gm: "+e.getGradoMembresia());
         for(Vector v:CAP.Vectores)
             System.out.println(CAP.mostrarReglaCompleta(v));
+        
         /*
         ArrayList<Competencia> competencias=c.cargarCompetencias();
         for(Competencia p:competencias)

@@ -21,11 +21,24 @@ import javax.swing.JOptionPane;
  * @author lenovo
  */
 public class control {
-    public void limiar()
+    public void limiarCompetencias()
     {
         ArrayList<Competencia>personas=cargarCompetencias();
         try{
         FileOutputStream fs = new FileOutputStream("Competenicas.bin");//Creamos el archivo
+        ObjectOutputStream os = new ObjectOutputStream(fs);//Esta clase tiene el método writeObject() que necesitamos
+        os.writeObject(null);
+        os.close();//Hay que cerrar siempre el archivo
+      }catch(FileNotFoundException e){
+        e.printStackTrace();
+      }catch(IOException e){
+        e.printStackTrace();}
+    }
+    public void limiarRelaciones()
+    {
+        ArrayList<Competencia>personas=cargarCompetencias();
+        try{
+        FileOutputStream fs = new FileOutputStream("Relaciones.bin");//Creamos el archivo
         ObjectOutputStream os = new ObjectOutputStream(fs);//Esta clase tiene el método writeObject() que necesitamos
         os.writeObject(null);
         os.close();//Hay que cerrar siempre el archivo
@@ -66,6 +79,50 @@ public class control {
             do
             {
                 aux=(Competencia)ois.readObject();
+                if(aux!=null)
+                     competencias.add(aux);//El método readObject() recupera el objeto
+
+            }while(aux!=null);
+
+            ois.close();
+            fis.close();
+
+        }catch(FileNotFoundException e){e.printStackTrace();}
+        catch(IOException e){e.printStackTrace();}
+        catch(ClassNotFoundException e){e.printStackTrace();}
+            return competencias;
+    }
+    public void guardarRelacion( Relacion competencia )
+    {
+            ArrayList<Relacion>personas=cargarRelaciones();
+            try{
+            FileOutputStream fs = new FileOutputStream("Relaciones.bin");//Creamos el archivo
+            ObjectOutputStream os = new ObjectOutputStream(fs);//Esta clase tiene el método writeObject() que necesitamos
+            for(Relacion p:personas)
+                os.writeObject(p);
+            os.writeObject(competencia);//El método writeObject() serializa el objeto y lo escribe en el archivo
+            os.writeObject(null);
+            os.close();//Hay que cerrar siempre el archivo
+          }catch(FileNotFoundException e){
+            e.printStackTrace();
+          }catch(IOException e){
+            e.printStackTrace();}
+    }
+    public ArrayList<Relacion> cargarRelaciones()
+    {
+         ArrayList<Relacion> competencias=new ArrayList<>();
+        try
+        {
+            File af = new File("Relaciones.bin");
+            if(!af.exists())
+                return competencias;
+            FileInputStream fis = new FileInputStream(af);
+
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Relacion aux;
+            do
+            {
+                aux=(Relacion)ois.readObject();
                 if(aux!=null)
                      competencias.add(aux);//El método readObject() recupera el objeto
 
