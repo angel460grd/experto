@@ -280,13 +280,13 @@ public class Form extends javax.swing.JFrame {
             contadorpuntos=0;
             if(!puntos.isEmpty()){
                     etiqueta= new Etiqueta(txtetiqueta.getText());
-                    etiqueta.setListaPuntos(puntos);
+                    etiqueta.listaPuntos=puntos;
                       arrayetiqueta.add(etiqueta);
                       System.out.println("Se agrego etiqueta "+etiqueta.getNombre());
                      for(float f[]:etiqueta.listaPuntos){
                       System.out.println("Puntos "+f[0]+" "+f[1]);
                      }
-                     puntos.clear();
+                     puntos=new ArrayList<>();
                      System.out.println(puntos.isEmpty());
                  
             }
@@ -304,28 +304,31 @@ public class Form extends javax.swing.JFrame {
         float traslape=0;
         int contadoret=arrayetiqueta.size();
         System.out.println("Cantidad de etiquetas "+ contadoret);
-        for(Etiqueta m:arrayetiqueta){
-           
-                System.out.println("Etiqueta "+m.getNombre());
-                System.out.println("Puntos "+m.listaPuntos.size());
-            
-        }
+        
         for(int i=0;i<contadoret;i++){
             etiqueta=arrayetiqueta.get(i);
-            System.out.println("etiqueta " +etiqueta.getNombre());
-            //System.out.println("puntos"+etiqueta.listaPuntos.size());
             if(i==0){      
                 Etiqueta et2=arrayetiqueta.get(i+1);
                 
-                if(etiqueta.listaPuntos.size()>1)
+                if(etiqueta.listaPuntos.size()>1){
                     traslape=calculartraslape(etiqueta.listaPuntos.get(i+1));
-                else
+                     etiqueta.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
+                     et2= new Etiqueta(etiqueta.nombre,etiqueta.listaPuntos.get(0),etiqueta.listaPuntos.get(2),etiqueta.listaPuntos);
+
+                    
+                }
+                else{
                     traslape=calculartraslape(etiqueta.listaPuntos.get(0));
+                    etiqueta.listaPuntos.add(new float[]{(float)0,(float)0});
+                     etiqueta.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
+                     et2= new Etiqueta(etiqueta.nombre,etiqueta.listaPuntos.get(1),etiqueta.listaPuntos.get(2),etiqueta.listaPuntos);
                 
-                etiqueta.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
-                et2= new Etiqueta(etiqueta.nombre,etiqueta.listaPuntos.get(0),etiqueta.listaPuntos.get(1),etiqueta.listaPuntos);
-                  a1.agregarE(et2);
-            }
+                }
+                
+               
+               
+                  a1.agregarE(etiqueta);
+            }else{
             int contpuntos=etiqueta.listaPuntos.size();
             for(int e=0;e<contpuntos;e++){
                     etiqueta.listaPuntos.add(new float[]{(etiqueta.listaPuntos.get(e)[0])-traslape,0});
@@ -341,17 +344,27 @@ public class Form extends javax.swing.JFrame {
                              etiqueta.listaPuntos.add(new float[]{(etiqueta.listaPuntos.get(e)[0])+traslape,0}); 
                     break;
             }
+            }
             int p= etiqueta.listaPuntos.size();
+            System.out.println("Cantidad de puntos despues del traslape "+p);
+            for(float []m:etiqueta.listaPuntos){
+           
+                System.out.println("Puntos "+m[0]+" "+m[1]);
+               // System.out.println("Puntos "+m.listaPuntos.size());
+            
+        }
+            ArrayList<float[]> arrayaux= new ArrayList<>();
             for(int x=0;x<p;x++){
+                if((x+1)!=p){
                 if(etiqueta.listaPuntos.get(x)[0]>etiqueta.listaPuntos.get(x+1)[0]){
                     float []aux= etiqueta.listaPuntos.get(x);
                     float []aux2= etiqueta.listaPuntos.get(x+1);
-                    etiqueta.listaPuntos.add(x, aux2);
-                    etiqueta.listaPuntos.add(x+1, aux);
-                }
+                    etiqueta.listaPuntos.set(x, aux2);
+                    etiqueta.listaPuntos.set(x+1, aux);
+                }}
             }
             for(float [] f:etiqueta.listaPuntos){
-                System.out.println("Etiqueta "+ etiqueta.getNombre());
+                System.out.println("Etiqueta despues de ordenar "+ etiqueta.getNombre());
                 System.out.println("Puntos "+f[0]+" "+f[1]);
             }
             
@@ -365,7 +378,7 @@ public class Form extends javax.swing.JFrame {
         }
         control c = new control();
         c.guardarCompetencias(a1);
-        
+        arrayetiqueta= new ArrayList<>();
     }//GEN-LAST:event_btncompetenciaActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
