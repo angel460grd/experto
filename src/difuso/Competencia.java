@@ -76,20 +76,25 @@ public class Competencia implements Serializable{
         centroide="\nCentroide ";
         ValorReal=0;
         float x=0,divisor=0,dividendo=0;
+        String n="";
         while(x<100)
         {
             float yx=0;
             for(Etiqueta e:Etiquetas)
             {   
+                
                 centroide=centroide+"\nEtiqueta "+e.getNombre();
                 float gmDifuso=e.gradoMembresia,gmX=e.gmX(x);
         
                     if(gmDifuso<gmX&&yx<gmX)
                     {yx=gmDifuso;
+                     if(x+1==100)
+                         
                      centroide=centroide+"\ngmDifuso "+gmDifuso+" gmX "+gmX+ "yx "+yx;}
                     else
                         if(yx<gmX){
-                            yx=gmX; 
+                            yx=gmX;
+                            if(x+1==100)
                          centroide=centroide+"\ngmDifuso "+gmDifuso+" gmX "+gmX+ " yx "+yx;
                         }   
             }
