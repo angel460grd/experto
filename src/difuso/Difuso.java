@@ -138,6 +138,16 @@ public class Difuso {
             System.out.println("h "+p.getNombre());
             System.out.println("Cantidad de etiquetas "+p.Etiquetas.size());
             for(Etiqueta e:p.getEtiquetas()){
+                for(int x=0;x<p.Etiquetas.size();x++){
+                if((x+1)!=p.Etiquetas.size()){
+                if(e.listaPuntos.get(x)[0]>e.listaPuntos.get(x+1)[0]){
+                    float []aux= e.listaPuntos.get(x);
+                    float []aux2= e.listaPuntos.get(x+1);
+                    e.listaPuntos.set(x, aux2);
+                    e.listaPuntos.set(x+1, aux);
+                }}
+            }
+               
                 System.out.println("Etiqueta "+e.nombre);
                  for(float f[]:e.listaPuntos){
                       System.out.println("Puntos "+f[0]+" "+f[1]);

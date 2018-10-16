@@ -69,6 +69,7 @@ public class Relacion implements Serializable
                 Consecuente.Etiquetas.get(vector.EtiquetaConsecuente).gradoMembresia=aux;
         }
     }
+    //producto cartesiano
     public void crearFamVectores()
     {
         Vectores=new ArrayList<>();
