@@ -148,6 +148,17 @@ public class control {
             System.out.println(vec.EtiquetaConsecuente);
         }
     }
-
+    public String[] etiquetasValor(Competencia com)
+    {
+        String[] etiquetasValor=new String[com.Etiquetas.size()];
+        int i=0;
+        for (Etiqueta et:com.Etiquetas)
+        {  
+            etiquetasValor[i]=et.getNombre()+" = "+et.gradoMembresia;
+            i++;
+        }
+        return etiquetasValor;
+            
+    }
         
 }
