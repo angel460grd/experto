@@ -323,6 +323,7 @@ control c;
         }
         CAP.inferir();
         CAP.Consecuente.desdifusicar();
+        Resultado=Resultado+"\n"+CAP.Consecuente.centroide;
         Resultado=Resultado+"\nValor Real de"+CAP.Consecuente.getNombre()+" "+CAP.Consecuente.ValorReal;
                 System.out.println( CAP.Consecuente.ValorReal);
         jtxtResultado.setText(Resultado);

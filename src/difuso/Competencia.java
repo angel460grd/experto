@@ -14,7 +14,9 @@ import java.util.ArrayList;
  * @author lenovo
  */
 public class Competencia implements Serializable{
-    public String Nombre;
+    public String Nombre,centroide;
+
+   
     ArrayList<Etiqueta> Etiquetas;
     transient float ValorReal;
 
@@ -62,26 +64,40 @@ public class Competencia implements Serializable{
             e.gradoMembresia(ValorReal);
     }
 
+  public String getCentroide() {
+        return centroide;
+    }
 
+    public void setCentroide(String centroide) {
+        this.centroide = centroide;
+    }
     public void desdifusicar()
-    {
+    {   
+        centroide="\nCentroide ";
         ValorReal=0;
         float x=0,divisor=0,dividendo=0;
         while(x<100)
         {
             float yx=0;
             for(Etiqueta e:Etiquetas)
-            {   float gmDifuso=e.gradoMembresia,gmX=e.gmX(x);
+            {   
+                centroide=centroide+"Etiqueta "+e.getNombre();
+                float gmDifuso=e.gradoMembresia,gmX=e.gmX(x);
+        
                     if(gmDifuso<gmX&&yx<gmX)
-                        yx=gmDifuso;
+                    {yx=gmDifuso;
+                     centroide=centroide+"\ngmDifuso "+gmDifuso+"gmX "+gmX+ "yx "+yx;}
                     else
-                        if(yx<gmX)
-                            yx=gmX;    
+                        if(yx<gmX){
+                            yx=gmX; 
+                         centroide=centroide+"\ngmDifuso "+gmDifuso+" gmX "+gmX+ " yx "+yx;
+                        }   
             }
             divisor+=yx*x;
             dividendo+=yx;
             x++;
         }
+         centroide=centroide+"\nDivisor "+divisor+ "Dividendo "+dividendo;
         ValorReal=divisor/dividendo;
     }
 }
