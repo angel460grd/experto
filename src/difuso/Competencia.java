@@ -81,12 +81,12 @@ public class Competencia implements Serializable{
             float yx=0;
             for(Etiqueta e:Etiquetas)
             {   
-                centroide=centroide+"Etiqueta "+e.getNombre();
+                centroide=centroide+"\nEtiqueta "+e.getNombre();
                 float gmDifuso=e.gradoMembresia,gmX=e.gmX(x);
         
                     if(gmDifuso<gmX&&yx<gmX)
                     {yx=gmDifuso;
-                     centroide=centroide+"\ngmDifuso "+gmDifuso+"gmX "+gmX+ "yx "+yx;}
+                     centroide=centroide+"\ngmDifuso "+gmDifuso+" gmX "+gmX+ "yx "+yx;}
                     else
                         if(yx<gmX){
                             yx=gmX; 
