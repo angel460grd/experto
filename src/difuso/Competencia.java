@@ -28,6 +28,7 @@ public class Competencia implements Serializable{
         Etiquetas=new ArrayList<>();
         this.Nombre = Nombre;
     }
+    
     public void agregarE(Etiqueta eti)
     {
         Etiquetas.add(eti);
