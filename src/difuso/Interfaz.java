@@ -274,7 +274,12 @@ control c;
         {   
             System.out.println(ant.ValorReal);
             ant.difusicar();
-            
+            System.out.println("Competencia "+ ant.getNombre());
+            for(Etiqueta e:ant.Etiquetas){
+                 System.out.println("Etiqueta "+e.getNombre());       
+                System.out.println("Grado de menbresia "+ e.getGradoMembresia());
+            } 
+           
         }
         CAP.inferir();
         CAP.Consecuente.desdifusicar();

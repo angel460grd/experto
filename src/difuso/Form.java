@@ -327,7 +327,7 @@ public class Form extends javax.swing.JFrame {
                 
                
                
-                  a1.agregarE(etiqueta);
+                  //a1.agregarE(etiqueta);
             }else{
             int contpuntos=etiqueta.listaPuntos.size();
             for(int e=0;e<contpuntos;e++){
