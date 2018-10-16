@@ -83,7 +83,7 @@ public class Competencia implements Serializable{
             for(Etiqueta e:Etiquetas)
             {   
                 
-                centroide=centroide+"\nEtiqueta "+e.getNombre();
+                //centroide=centroide+"\nEtiqueta "+e.getNombre();
                 float gmDifuso=e.gradoMembresia,gmX=e.gmX(x);
         
                     if(gmDifuso<gmX&&yx<gmX)
