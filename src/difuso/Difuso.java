@@ -15,9 +15,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.chart.Chart;
-import org.knowm.xchart.QuickChart;
-import org.knowm.xchart.SwingWrapper;
-import org.knowm.xchart.XYChart;
+//import org.knowm.xchart.QuickChart;
+//import org.knowm.xchart.SwingWrapper;
+//import org.knowm.xchart.XYChart;
 
 /**
  *
@@ -135,9 +135,10 @@ public class Difuso {
         for(Competencia p:compe)
         {
             
-            System.out.println("h"+p.getNombre());
+            System.out.println("h "+p.getNombre());
+            System.out.println("Cantidad de etiquetas "+p.Etiquetas.size()+"\n");
             for(Etiqueta e:p.getEtiquetas())
-                System.out.println(e.nombre);
+                System.out.println("Etiqueta "+e.nombre);
         }
         
         
@@ -199,17 +200,17 @@ public class Difuso {
 
 
 
-                org.knowm.xchart.XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
-                org.knowm.xchart.XYChart chart1 = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData1, yData1);
-                org.knowm.xchart.XYChart chart2 = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData2, yData2);
+                //org.knowm.xchart.XYChart chart = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData, yData);
+                //org.knowm.xchart.XYChart chart1 = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData1, yData1);
+                //org.knowm.xchart.XYChart chart2 = QuickChart.getChart("Sample Chart", "X", "Y", "y(x)", xData2, yData2);
 
                 
 //                ArrayList<Chart> chart = new ArrayList<>();
                
                 
-                new SwingWrapper(chart).displayChart();
-                new SwingWrapper(chart1).displayChart();
-                new SwingWrapper(chart2).displayChart();
+                //new SwingWrapper(chart).displayChart();
+                //new SwingWrapper(chart1).displayChart();
+                //new SwingWrapper(chart2).displayChart();
     
         
                 

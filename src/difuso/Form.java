@@ -18,7 +18,7 @@ public class Form extends javax.swing.JFrame {
      * Creates new form Form
      */
     Competencia a1;
-    ArrayList<float[]> puntos;
+    ArrayList<float[]> puntos=new ArrayList<>();
     ArrayList<Etiqueta> v= new ArrayList<>();
     Etiqueta et;
     int contadorpuntos=0,contadoretiquetas=0;
@@ -263,11 +263,12 @@ public class Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPActionPerformed
-       puntos= new ArrayList<>();
+
         if(contadorpuntos<2){
             float puntox=Float.parseFloat(txtpuntocritico.getText());
              float puntoy=Float.parseFloat(txtpuntocriticoy.getText());
-            puntos.add(new float[]{puntox,puntoy});
+            puntos.add(new float[]{puntox,puntoy}); 
+            System.out.println("Se agrego punto "+puntos.get(contadorpuntos)[0]+" "+puntos.get(contadorpuntos)[1]);
             contadorpuntos++;
         }else
         JOptionPane.showMessageDialog(null, "Se excedio el numero de puntos criticos");
@@ -282,7 +283,14 @@ public class Form extends javax.swing.JFrame {
                     et.setNombre(txtetiqueta.getText());
                     et.setListaPuntos(puntos);
                       v.add(et);
+                      System.out.println("Se agrego etiqueta "+et.getNombre());
+                     for(float f[]:v.get(contadorpuntos).listaPuntos){
+                      System.out.println("Puntos "+f[0]+" "+f[1]);
+                     }
+                     puntos.clear();
+                 
             }
+             
             else
                 JOptionPane.showMessageDialog(null, "Falta definir por lo menos un punto critico");}
         else
@@ -295,15 +303,24 @@ public class Form extends javax.swing.JFrame {
         a1= new Competencia(txtnombre.getText());
         float traslape=0;
         int contadoret=v.size();
+        System.out.println("Cantidad de etiquetas "+ contadoret);
+        for(Etiqueta m:v){
+           
+                System.out.println("Etiqueta "+m.getNombre());
+                System.out.println("Puntos "+m.listaPuntos.get(1)[0]);
+            
+        }
         for(int i=0;i<contadoret;i++){
             et=v.get(i);
+            System.out.println("etiqueta " +et.getNombre());
+            System.out.println("puntos"+et.listaPuntos.size());
             if(i==0){      
                 Etiqueta et2=v.get(i+1);
                 
                 if(et.listaPuntos.size()>1)
                     traslape=calculartraslape(et.listaPuntos.get(i+1));
                 else
-                    traslape=calculartraslape(et.listaPuntos.get(i));
+                    traslape=calculartraslape(et.listaPuntos.get(0));
                 
                 et.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
                 et2= new Etiqueta(et.nombre,et.listaPuntos.get(0),et.listaPuntos.get(1),et.listaPuntos);
@@ -333,8 +350,13 @@ public class Form extends javax.swing.JFrame {
                     et.listaPuntos.add(x+1, aux);
                 }
             }
+            for(float [] f:et.listaPuntos){
+                System.out.println("Etiqueta "+ et.getNombre());
+                System.out.println("Puntos "+f[0]+" "+f[1]);
+            }
+            
             Etiqueta et2= new Etiqueta(et.getNombre(),et.listaPuntos.get(0),et.listaPuntos.get(p-1),et.listaPuntos);
-             a1.agregarE(et);
+             a1.agregarE(et2);
             
         }
         
