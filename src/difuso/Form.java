@@ -19,8 +19,8 @@ public class Form extends javax.swing.JFrame {
      */
     Competencia a1;
     ArrayList<float[]> puntos=new ArrayList<>();
-    ArrayList<Etiqueta> v= new ArrayList<>();
-    Etiqueta et;
+    ArrayList<Etiqueta> arrayetiqueta= new ArrayList<>();
+    Etiqueta etiqueta;
     int contadorpuntos=0,contadoretiquetas=0;
     public Form() {
         initComponents();
@@ -265,8 +265,8 @@ public class Form extends javax.swing.JFrame {
     private void btnAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPActionPerformed
 
         if(contadorpuntos<2){
-            float puntox=Float.parseFloat(txtpuntocritico.getText());
-             float puntoy=Float.parseFloat(txtpuntocriticoy.getText());
+            float puntox=Float.parseFloat(txtpuntocriticoy.getText());
+             float puntoy=Float.parseFloat(txtpuntocritico.getText());
             puntos.add(new float[]{puntox,puntoy}); 
             System.out.println("Se agrego punto "+puntos.get(contadorpuntos)[0]+" "+puntos.get(contadorpuntos)[1]);
             contadorpuntos++;
@@ -279,15 +279,15 @@ public class Form extends javax.swing.JFrame {
         if(contadoretiquetas<8){  
             contadorpuntos=0;
             if(!puntos.isEmpty()){
-                    et= new Etiqueta();
-                    et.setNombre(txtetiqueta.getText());
-                    et.setListaPuntos(puntos);
-                      v.add(et);
-                      System.out.println("Se agrego etiqueta "+et.getNombre());
-                     for(float f[]:v.get(contadorpuntos).listaPuntos){
+                    etiqueta= new Etiqueta(txtetiqueta.getText());
+                    etiqueta.setListaPuntos(puntos);
+                      arrayetiqueta.add(etiqueta);
+                      System.out.println("Se agrego etiqueta "+etiqueta.getNombre());
+                     for(float f[]:etiqueta.listaPuntos){
                       System.out.println("Puntos "+f[0]+" "+f[1]);
                      }
                      puntos.clear();
+                     System.out.println(puntos.isEmpty());
                  
             }
              
@@ -302,65 +302,65 @@ public class Form extends javax.swing.JFrame {
     private void btncompetenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncompetenciaActionPerformed
         a1= new Competencia(txtnombre.getText());
         float traslape=0;
-        int contadoret=v.size();
+        int contadoret=arrayetiqueta.size();
         System.out.println("Cantidad de etiquetas "+ contadoret);
-        for(Etiqueta m:v){
+        for(Etiqueta m:arrayetiqueta){
            
                 System.out.println("Etiqueta "+m.getNombre());
-                System.out.println("Puntos "+m.listaPuntos.get(1)[0]);
+                System.out.println("Puntos "+m.listaPuntos.size());
             
         }
         for(int i=0;i<contadoret;i++){
-            et=v.get(i);
-            System.out.println("etiqueta " +et.getNombre());
-            System.out.println("puntos"+et.listaPuntos.size());
+            etiqueta=arrayetiqueta.get(i);
+            System.out.println("etiqueta " +etiqueta.getNombre());
+            //System.out.println("puntos"+etiqueta.listaPuntos.size());
             if(i==0){      
-                Etiqueta et2=v.get(i+1);
+                Etiqueta et2=arrayetiqueta.get(i+1);
                 
-                if(et.listaPuntos.size()>1)
-                    traslape=calculartraslape(et.listaPuntos.get(i+1));
+                if(etiqueta.listaPuntos.size()>1)
+                    traslape=calculartraslape(etiqueta.listaPuntos.get(i+1));
                 else
-                    traslape=calculartraslape(et.listaPuntos.get(0));
+                    traslape=calculartraslape(etiqueta.listaPuntos.get(0));
                 
-                et.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
-                et2= new Etiqueta(et.nombre,et.listaPuntos.get(0),et.listaPuntos.get(1),et.listaPuntos);
+                etiqueta.listaPuntos.add(new float[]{et2.listaPuntos.get(0)[0],(float)0});
+                et2= new Etiqueta(etiqueta.nombre,etiqueta.listaPuntos.get(0),etiqueta.listaPuntos.get(1),etiqueta.listaPuntos);
                   a1.agregarE(et2);
             }
-            int contpuntos=et.listaPuntos.size();
+            int contpuntos=etiqueta.listaPuntos.size();
             for(int e=0;e<contpuntos;e++){
-                    et.listaPuntos.add(new float[]{(et.listaPuntos.get(e)[0])-traslape,0});
+                    etiqueta.listaPuntos.add(new float[]{(etiqueta.listaPuntos.get(e)[0])-traslape,0});
                     if(contpuntos>1){
                         if(i+1==contadoret)
-                            et.listaPuntos.add(new float[]{(float)100,(float)1});
+                            etiqueta.listaPuntos.add(new float[]{(float)100,(float)1});
                         else
-                         et.listaPuntos.add(new float[]{(et.listaPuntos.get(e+1)[0])+traslape,0});}
+                         etiqueta.listaPuntos.add(new float[]{(etiqueta.listaPuntos.get(e+1)[0])+traslape,0});}
                     else
                          if(i+1==contadoret)
-                             et.listaPuntos.add(new float[]{(float)100,(float)0});
+                             etiqueta.listaPuntos.add(new float[]{(float)100,(float)0});
                          else
-                             et.listaPuntos.add(new float[]{(et.listaPuntos.get(e)[0])+traslape,0}); 
+                             etiqueta.listaPuntos.add(new float[]{(etiqueta.listaPuntos.get(e)[0])+traslape,0}); 
                     break;
             }
-            int p= et.listaPuntos.size();
+            int p= etiqueta.listaPuntos.size();
             for(int x=0;x<p;x++){
-                if(et.listaPuntos.get(x)[0]>et.listaPuntos.get(x+1)[0]){
-                    float []aux= et.listaPuntos.get(x);
-                    float []aux2= et.listaPuntos.get(x+1);
-                    et.listaPuntos.add(x, aux2);
-                    et.listaPuntos.add(x+1, aux);
+                if(etiqueta.listaPuntos.get(x)[0]>etiqueta.listaPuntos.get(x+1)[0]){
+                    float []aux= etiqueta.listaPuntos.get(x);
+                    float []aux2= etiqueta.listaPuntos.get(x+1);
+                    etiqueta.listaPuntos.add(x, aux2);
+                    etiqueta.listaPuntos.add(x+1, aux);
                 }
             }
-            for(float [] f:et.listaPuntos){
-                System.out.println("Etiqueta "+ et.getNombre());
+            for(float [] f:etiqueta.listaPuntos){
+                System.out.println("Etiqueta "+ etiqueta.getNombre());
                 System.out.println("Puntos "+f[0]+" "+f[1]);
             }
             
-            Etiqueta et2= new Etiqueta(et.getNombre(),et.listaPuntos.get(0),et.listaPuntos.get(p-1),et.listaPuntos);
+            Etiqueta et2= new Etiqueta(etiqueta.getNombre(),etiqueta.listaPuntos.get(0),etiqueta.listaPuntos.get(p-1),etiqueta.listaPuntos);
              a1.agregarE(et2);
             
         }
         
-        if(v.isEmpty()){
+        if(arrayetiqueta.isEmpty()){
             JOptionPane.showMessageDialog(null, "Falta agregar etiquetas a la competencia");
         }
         control c = new control();
