@@ -14,8 +14,10 @@ public class Etiqueta implements Serializable{
     public float[] puntoI=new float[2],puntoF=new float[2];
     public ArrayList<float[]> listaPuntos=new ArrayList<>();
     public  int puntoCritico;
+    transient  float gradiante,ancho,error;
     //no se guardara en archivo
-    transient float gradoMembresia=0;
+    transient float gradoMembresia=0,gradoMembresiaDeseado;
+    transient float[] puntoA=new float[2],puntoB=new float[2];
 
   
     //public  int puntoI,puntoF;
@@ -110,6 +112,19 @@ public class Etiqueta implements Serializable{
         else
             this.gradoMembresia=0;
     }
+    
+    public void ajustecapa4(float ValorDeseado,float pez)
+    {
+        this.gradoMembresiaDeseado=gmX(ValorDeseado);
+        this.error=gradoMembresiaDeseado-gradoMembresia;
+        this.gradiante=pez*(1-gradoMembresia)*error;
+    }
+    public void ajustecapa2(float ValorReal,float pez)
+    {
+        ancho=pez*ValorReal*gradiante;
+        puntoB[0]+=ancho+puntoB[0]+puntoA[0];
+        
+    }
     public float  gmX(float valorReal )
     {   
         //esta dentro del rango la etiqueta
@@ -125,8 +140,11 @@ public class Etiqueta implements Serializable{
                 {
                     float pendiente=(puntoSeg2[1]-puntoSeg1[1])/(puntoSeg2[0]-puntoSeg1[0]);
                     //sustituyo punto2 por un puto (valorReal,gradoMemvresia)
+                    puntoA=puntoSeg1;
+                    puntoB=puntoSeg2;
                     return pendiente*(valorReal-puntoSeg1[0])+puntoSeg1[1];
                     //si ya encontre grado membresia no es nesesario seguir recorriendo los puntos
+                    
                     
                 }
                

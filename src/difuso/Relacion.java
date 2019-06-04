@@ -20,6 +20,8 @@ public class Relacion implements Serializable
    ArrayList<Vector> Vectores;
    ArrayList<Integer> idAntecedentes;
    transient ArrayList<Competencia> Antecedentes =new ArrayList<>();
+   transient Vector vectorUsado;
+   transient int antecedenteUsado;
     public Relacion(int idConsecuente, ArrayList<Integer> Antecedentes) {
         this.idConsecuente = idConsecuente;
         this.idAntecedentes = Antecedentes;
@@ -30,6 +32,11 @@ public class Relacion implements Serializable
         for(Competencia ant:Antecedentes)
             Relacion+=ant.Nombre+" X ";
         return Relacion.substring(0, Relacion.length()-3)+" -> "+Consecuente.getNombre();
+    }
+    public void ajustepeso(float pez,float ValorDeseado)
+    {
+        for (Etiqueta e:Consecuente.getEtiquetas()) 
+            e.ajustecapa4(ValorDeseado, pez);
     }
     public void cargarAntesedentesYConsecuete(ArrayList<Competencia> Competencias)
     {
@@ -66,7 +73,10 @@ public class Relacion implements Serializable
             }
             //de los minimos de cada vector, ve salvando el mayor
             if(Consecuente.Etiquetas.get(vector.EtiquetaConsecuente).gradoMembresia<aux)
+            {
                 Consecuente.Etiquetas.get(vector.EtiquetaConsecuente).gradoMembresia=aux;
+                vectorUsado=vector;
+            }
         }
     }
     //producto cartesiano

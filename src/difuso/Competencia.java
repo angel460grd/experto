@@ -105,4 +105,15 @@ public class Competencia implements Serializable{
          centroide=centroide+"\nDivisor "+divisor+ "Dividendo "+dividendo;
         ValorReal=divisor/dividendo;
     }
+    public void gradianteS(float ValorDeseado)
+    {
+        gradiante =ValorReal*(1-ValorReal)*(ValorDeseado-ValorReal);
+    }
+  
+    float gradiante;
+    public void ajustarEtiquetas(float pez)
+    {
+        for(Etiqueta e:Etiquetas)
+            e.ajustarPeso(ValorReal, gradiante,pez);
+    }
 }
